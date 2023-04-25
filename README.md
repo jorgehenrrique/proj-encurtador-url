@@ -54,7 +54,7 @@ Projeto utiliza a API: [API short.io](https://app.short.io/settings/integrations
 <img src="assets/requisitos/Lista-de-Links-Excluir.png">
 
 
-### Para utililar o código, crie sua conta e obtenha sua api key
+### Para utilizar o código, crie sua conta e obtenha sua api key
 
 * [Acesse e crie sua conta](https://short.io/pt)
 

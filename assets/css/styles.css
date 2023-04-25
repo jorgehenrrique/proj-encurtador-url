@@ -41,6 +41,7 @@ h1{
     width: 6rem;
     align-self: center;
     border-radius: var(--border-radius);
+    cursor: pointer;
 }
 /* || Container dos botao + url */
 .campo-url{

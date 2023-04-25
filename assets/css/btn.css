@@ -1,0 +1,14 @@
+.btn{
+    height: 4rem;
+    background-color: var(--color-04);
+    border-radius: var(--border-radius);
+    padding: 0 0.5rem;
+    min-width: 8.6rem;
+}
+.btn:hover{
+    border-bottom: .5rem solid var(--color-01);
+}
+.btn-encurtar{
+    align-self: center;
+    width: 30%;
+}

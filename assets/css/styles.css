@@ -1,0 +1,53 @@
+:root{
+    --color-01: #564e33;
+    --color-02: #f6f3da;
+    --color-03: #ece7c9;
+    --color-04: #9a8035;
+    --color-05: #9c8e54;
+
+    --border-radius: 8px;
+}
+*{
+    outline: 1px solid rgba(255, 0, 0, 0.334);
+}
+body{
+    background-color: var(--color-01);
+}
+.container{
+    background-color: #ece7c9;
+    width: 80rem;
+    height: fit-content;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    padding: 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+h1{
+    align-self: center;
+    text-align: center;
+    font-size: xx-large;
+    color: var(--color-01)
+}
+.logo{
+    width: 6rem;
+    align-self: center;
+    border-radius: var(--border-radius);
+}
+.encurtar{
+    width: 100%;
+    height: 4rem;
+    border: solid 0.2rem var(--color-04);
+    border-radius: var(--border-radius);
+    align-self: center;
+    padding: 0 2rem;
+}
+footer{
+    position: fixed;
+    font-size: 1rem;
+    bottom: 1%;
+    width: 100%;
+    text-align: center;
+    color: var(--color-04);
+}

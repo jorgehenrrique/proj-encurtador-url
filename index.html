@@ -14,18 +14,36 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="URL Encurtador">
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icon/.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icon/copia180.png">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" type="image/x-icon" href="./assets/icon/.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon/.png">
+    <link rel="icon" type="image/x-icon" href="./assets/icon/copia180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon/copia192.png">
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/media.css">
+    <link rel="stylesheet" href="assets/css/btn.css">
 
-    <script type="module" src="assets/js/main.js" defer></script>
+    <script type="module" src="main.js" defer></script>
     <title>K - Encurtador de URLs</title>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Encurtador de URL</h1>
+        <img src="./assets/img/img.png" alt="Logo K" class="logo">
+
+
+        <input type="text" placeholder="URL PARA ENCURTAR" class="encurtar">
+        <button class="btn-encurtar btn">ENCURTAR</button>
+
+        <div class="container-loader">
+            <div class="loader"></div>
+        </div>
+
+    </div>
+    <footer>
+        <p>MACH1 - Copyright © 2023</p>
+    </footer>
 </body>
 </html>

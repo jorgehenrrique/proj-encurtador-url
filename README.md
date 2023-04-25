@@ -54,11 +54,11 @@ Projeto utiliza a API: [API short.io](https://app.short.io/settings/integrations
 <img src="assets/requisitos/Lista-de-Links-Excluir.png">
 
 
-# Crie sua conta e obtenha sua api key, ao ulitilar o código
+### Para utililar o código, crie sua conta e obtenha sua api key
 
-* [short.io](https://short.io/pt)
+* [Acesse e crie sua conta](https://short.io/pt)
 
-* Para isso crie um arquivo chamado: **config.json**
+* Feito isso, crie um arquivo chamado: **config.json**
 * E adicione o seguinte:
 
 ```json

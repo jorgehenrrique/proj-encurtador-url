@@ -24,23 +24,92 @@
     <link rel="stylesheet" href="assets/css/loader.css">
     <link rel="stylesheet" href="assets/css/media.css">
     <link rel="stylesheet" href="assets/css/btn.css">
+    <link rel="stylesheet" href="assets/css/ajustes.css">
 
     <script type="module" src="main.js" defer></script>
     <title>K - Encurtador de URLs</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="display: none;">
+        <img src="assets/icon/conf/conf.png" class="conf icon-conf" style="width: 20px;">
         <h1>Encurtador de URL</h1>
         <img src="./assets/img/img.png" alt="Logo K" class="logo">
 
-
-        <input type="text" placeholder="URL PARA ENCURTAR" class="encurtar">
-        <button class="btn-encurtar btn">ENCURTAR</button>
-
-        <div class="container-loader">
-            <div class="loader"></div>
+        <div class="campo-url">
+            <input type="text" placeholder="URL PARA ENCURTAR" class="encurtar">
+            <button class="btn-encurtar-link btn" style="display: none;"><img src="./assets/icon/conf/link.png" class="icon-conf" style="width: 20px;"></button>
+        </div>
+        <div class="container-loader" style="display: flex;">
+            <button class="btn-encurtar btn">ENCURTAR</button>
+            <div class="loader" style="display: none;"></div>
         </div>
 
+        <div class="link-retornado" style="display: none;">
+            <a href=""></a>
+            <small></small>
+        </div>
+
+        <div class="btn-interacao" style="display: none;">
+            <button class="btn-copiar btn"><img src="assets/icon/conf/copy.png" class="icon-conf" style="width: 20px;"></button>
+            <button class="btn-compartilhar btn"><img src="assets/icon/conf/share.png" class="icon-conf" style="width: 20px;"></button>
+            <button class="btn-qr btn"><img src="assets/icon/conf/qr.png" class="icon-conf" style="width: 20px;"></button>
+        </div>
+
+        <div class="msg" style="display: none;">
+            
+        </div>
+
+    </div>
+    <div class="ajustes" style="display: non;">
+        <img src="assets/icon/conf/conf.png" class="conf icon-conf" style="width: 20px;">
+        <h1>Encurtador de URL</h1>
+        <img src="./assets/img/img.png" alt="Logo K" class="logo">
+
+        <div>
+            <h2>Gerenciar Links</h2>
+            <p>Domínio: <a href="">link</a></p>
+        </div>
+
+        <div class="msg" style="display: none;">
+            
+        </div>
+        <div class="tabela-links">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="" id="dadosV">Link Encurtado</th>
+                        <th colspan="" id="dadosV">Link Original</th>
+                        <th colspan="" id="dadosV">Data/Hora</th>
+                        <th colspan="" id="dadosV">Ação</th>
+                    </tr>
+                    </thead>
+                    <tbody id="lista-veiculo">
+                        <tr>
+                            <td>Coluna 1, Linha 2</td>
+                            <td>Coluna 2, Linha 2</td>
+                            <td>Coluna 3, Linha 2</td>
+                            <td><img src="assets/icon/conf/edit.png" class="icon-conf"> <img src="assets/icon/conf/del.png" class="icon-conf"></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+
+        <div class="modal-editar">
+            <div class="modal">
+                <h2>Este é um modal</h2>
+                <p>Aqui está o conteúdo do modal</p>
+                <button class="fechar-modal"><img src="assets/icon/conf/not.png" class="conf icon-conf" style="width: 20px;"></button>
+            </div>
+            <div class="modal">
+                <p>Deseja excluir o link: <a href=""></a></p>
+
+                <div>
+                    <button class="btn">SIM</button>
+                    <button class="btn">NÃO</button>
+                </div>
+                
+            </div>
+        </div>
     </div>
     <footer>
         <p>MACH1 - Copyright © 2023</p>

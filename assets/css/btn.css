@@ -4,11 +4,31 @@
     border-radius: var(--border-radius);
     padding: 0 0.5rem;
     min-width: 8.6rem;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 .btn:hover{
     border-bottom: .5rem solid var(--color-01);
+    transition: all .2s ease-in-out;
+}
+.btn:active{
+    border-bottom: .5rem solid var(--color-05);
+    transition: all .1s ease-in-out;
 }
 .btn-encurtar{
     align-self: center;
     width: 30%;
+    position: relative;
+}
+
+/* || Icones dos botoes */
+.btn-encurtar-link{
+    /* flex-grow: 1; */
+    /* display: inline-block; */
+    text-align: center;
+}
+.icon-conf{
+    width: 2rem;
+    display: inline-block;
+    vertical-align: middle;
 }

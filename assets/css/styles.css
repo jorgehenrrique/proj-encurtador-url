@@ -23,6 +23,13 @@ body{
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    position: relative;
+}
+.conf{
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    cursor: pointer;
 }
 h1{
     align-self: center;
@@ -35,13 +42,21 @@ h1{
     align-self: center;
     border-radius: var(--border-radius);
 }
+/* || Container dos botao + url */
+.campo-url{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 4rem;
+    gap: .5rem;
+}
+/* input */
 .encurtar{
-    width: 100%;
     height: 4rem;
     border: solid 0.2rem var(--color-04);
     border-radius: var(--border-radius);
-    align-self: center;
     padding: 0 2rem;
+    flex-grow: 8;
 }
 footer{
     position: fixed;
@@ -50,4 +65,27 @@ footer{
     width: 100%;
     text-align: center;
     color: var(--color-04);
+}
+
+/* || Primeiro retorno */
+.link-retornado{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+    background-color: #f6f3da;
+    border-radius: var(--border-radius);
+    padding: 3rem 0 1.5rem 0;
+    color: #564e33;
+}
+.link-retornado a{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* || Container dos 3 btns */
+.btn-interacao{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }

@@ -62,8 +62,8 @@ Projeto utiliza a API: [API short.io](https://app.short.io/settings/integrations
 * E adicione o seguinte:
 
 ```json
-    {
-	    "apiKey": "sua_api_key",
-	    "domainId": "seu_id_domain"
-    }
+{
+    "apiKey": "sua_api_key",
+	"domainId": "seu_id_domain"
+}
 ```

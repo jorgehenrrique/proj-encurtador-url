@@ -1,15 +1,19 @@
 import {
     btnEncurtar, conf, inputEncurtar, loading,
     logo, telaAjustes, telaContainer
-} from "./assets/modules/elementos.js";
+} from "../modules/elementos.js";
+import { carregarLinks } from "./tela-ajustes.js";
 
-conf.onclick = () => {
-    if (telaContainer.style.display === '' || telaContainer.style.display === 'flex') {
-        telaAjustes.style.display = 'flex';
-        telaContainer.style.display = 'none';
-    } else {
-        telaContainer.style.display = 'flex';
-        telaAjustes.style.display = 'none';
+for (let c of conf) {
+    c.onclick = () => {
+        if (telaContainer.style.display === '' || telaContainer.style.display === 'flex') {
+            telaAjustes.style.display = 'flex';
+            telaContainer.style.display = 'none';
+            carregarLinks();
+        } else {
+            telaContainer.style.display = 'flex';
+            telaAjustes.style.display = 'none';
+        }
     }
 }
 
@@ -27,4 +31,3 @@ btnEncurtar.onclick = () => {
         }, 2000);
     }
 };
-

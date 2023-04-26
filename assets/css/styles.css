@@ -12,7 +12,6 @@
 }
 body{
     background-color: var(--color-01);
-    position: relative;
 }
 .hide {
     display: none;
@@ -27,6 +26,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    position: relative;
 }
 .conf{
     position: absolute;

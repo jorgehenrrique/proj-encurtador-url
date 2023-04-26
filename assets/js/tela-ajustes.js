@@ -1,7 +1,7 @@
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
-    modalBtnNao, modalBtnSim, telaAjustes, telaContainer
-} from "./elementos.js";
+    modalBtnNao, modalBtnSim, telaAjustes, telaContainer, logo, loading
+} from "../modules/elementos.js";
 
 function exibirMensagens(status, mensagem) {
     document.querySelector('.mensagem-adc-categoria').innerHTML = mensagem;
@@ -45,20 +45,30 @@ logo.onclick = () => { // Clique na logo
     modalBtnNao.addEventListener('click', () => trocaTela(false))
 }
 
-function carregarLinks() {
+export function carregarLinks() {
     fetch('../config.json')
         .then(response => response.json())
         .then(data => {
             const apiKey = data.apiKey;
             const domainId = data.domainId;
             // console.log(apiKey, domainId);
-            requestKey(data);
+            solicitaAcesso(apiKey, domainId);
         })
         .catch(error => console.error('Erro ao buscar config.json:', error));
 
-    function requestKey(env) {
-        console.log(env.apiKey)
-        console.log(env.domainId)
+    function solicitaAcesso(apiKey, domainId) {
+        console.log(apiKey)
+        console.log(domainId)
+
+        const options = {
+            method: 'GET',
+            headers: { accept: 'application/json', Authorization: `${apiKey}` }
+        };
+
+        fetch(`https://api.short.io/api/links?domain_id=${domainId}&limit=30&dateSortOrder=desc`, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
     }
 }
 

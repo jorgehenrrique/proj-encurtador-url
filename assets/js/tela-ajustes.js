@@ -2,7 +2,7 @@ import { chaves } from "../../config.js";
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
-    logo, loading, dominio, listaLinks, divModalEditarP, fecharModal,
+    logo, loading, dominio, listaLinks, divModalEditarP, fecharModal, inputPath, inputUrl, btnSalvarEdit,
 } from "../modules/elementos.js";
 
 function exibirMensagens(status, mensagem) {
@@ -50,6 +50,7 @@ export function carregarLinks() { // Recolher keys
     const apiKey = chaves.apiKey;
     const domainId = chaves.domainId;
     solicitaAcesso(apiKey, domainId);
+    // console.log(apiKey, domainId)
 }
 
 function solicitaAcesso(apiKey, domainId) { // Acessar api de links
@@ -96,7 +97,7 @@ function montaTabela(dados) {
         <td>${element.shortURL}</td>
         <td>${element.originalURL}</td>
         <td>${time.date} às ${time.time}</td>
-        <td><img src="assets/icon/conf/edit.png" class="icon-conf edit-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"> <img src="assets/icon/conf/del.png" class="icon-conf delete-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"></td>
+        <td><img src="assets/icon/conf/edit.png" class="icon-conf edit-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}" lin2="${element.originalURL}"> <img src="assets/icon/conf/del.png" class="icon-conf delete-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"></td>
     </tr>`
         montarEventos();
     });
@@ -124,7 +125,8 @@ function montarEventos() {
         icon.addEventListener('click', () => {
             const idString = icon.getAttribute('id-string');
             const link = icon.getAttribute('lin');
-            editarLink(idString, link);
+            const linkOriginal = icon.getAttribute('lin2');
+            editarLink(idString, link, linkOriginal);
         });
     });
 
@@ -137,36 +139,81 @@ function montarEventos() {
     });
 };
 
-function editarLink(linkId, link) {
+function editarLink(linkId, link, linkOriginal) { // Modal editar link
     console.log(`${linkId} Editado ${link}`)
     divModais.style.display = 'block';
     divModalEditar.style.display = 'block';
     divModalEditarP.innerText = `Editando: ${link}`;
 
     fecharModal.addEventListener('click', () => trocaTela(false));
+    tratarEdicao(linkId, link, linkOriginal);
 }
 
-function excluirLink(linkId, link) {
+function excluirLink(linkId, link) { // Modal confirma excluir link
     console.log(`${linkId} Excluido ${link}`)
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = `Deseja excluir o link: ${link}`;
 
     modalBtnNao.addEventListener('click', () => trocaTela(false));
-    modalBtnSim.addEventListener('click', () => deletarLink(linkId, link)); // Chamar excluir link
+    modalBtnSim.addEventListener('click', () => deletarLink(linkId));
 }
 
 
 // || Delete link
-function deletarLink(linkId, link) {
+function deletarLink(linkId) {
     const apiKey = chaves.apiKey;
-    const domainId = chaves.domainId;
 
     const options = { method: 'DELETE', headers: { Authorization: `${apiKey}` } };
 
-    fetch(`Ïhttps://api.short.io/links/${linkId}`, options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+    fetch(`https://api.short.io/links/${linkId}`, options)
+        .then(response => {
+            if (response.ok && response.status === 200) {
+                return response.json();
+            } else { throw new Error('Resposta do servidor: ', response.status) }
+        }).then(response => {
+            console.log('Deletado?', response);
+            trocaTela(false);
+            carregarLinks();
+            // tratar mensagens de sucesso
+        }).catch(err => console.error(err));
+}
+
+
+// || Editar link
+function tratarEdicao(linkId, link, linkOriginal) {
+    let slug = link.split('/');
+    slug = slug[3];
+
+    inputPath.value = `${slug}`;
+    inputUrl.value = `${linkOriginal}`;
+
+
+    btnSalvarEdit.addEventListener('click', () => {
+        slug = inputPath.value.trim();
+        linkOriginal = inputUrl.value.trim();
+
+        const apiKey = chaves.apiKey;
+        const options = {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                Authorization: `${apiKey}`
+            },
+            body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}` })
+        };
+
+        fetch(`https://api.short.io/links/${linkId}`, options)
+            .then(response => {
+                if (response.ok && response.status === 200) {
+                    return response.json();
+                } else { throw new Error('Resposta do servidor: ', response.status) }
+            }).then(response => {
+                console.log(response)
+                trocaTela(false);
+                carregarLinks();
+            }).catch(err => console.error(err));
+    });
 
 }

@@ -30,7 +30,7 @@ h2{
 }
 
 
-/* || Modal */
+/* || Ajustes Modal */
 .modais {
     position: fixed;
     top: 0;
@@ -41,7 +41,6 @@ h2{
     display: none;
     z-index: 2;
 }
-
 .modal {
     background-color: var(--color-03);
     width: 80%;
@@ -66,23 +65,11 @@ h2{
     position: relative;
     display: none;
 }
-
-/* .fechar-modal {
+.fechar-modal {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-} */
-
-  /* Estilo extra para o botão de abrir o modal */
-.abrir-modal {
-    margin-top: 20px;
-    background-color: #2c3e50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
+    top: 1rem;
+    right: 1rem;
+    padding: .5rem .5rem;
     cursor: pointer;
 }
 .modal-boolean p{
@@ -90,8 +77,42 @@ h2{
     font-weight: bold;
     margin-bottom: 1rem;
 }
+.modal p{
+    color: var(--color-01);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 
-
+/* || Form do modal */
+form{
+    display: flex;
+    flex-direction: column;
+    color: var(--color-01);
+    margin-top: 2rem;
+    font-weight: bold;
+}
+form input{
+    height: 4rem;
+    border: solid 0.2rem var(--color-04);
+    border-radius: var(--border-radius);
+    padding: 0 2rem;
+}
+form label{
+    text-align: left;
+    margin-bottom: .5rem;
+}
+#path{
+    background-color: var(--color-02);
+    width: 30%;
+}
+#url-original{
+    /* height: 4rem; */
+    background-color: var(--color-02);
+    width: auto;
+}
+.salvar-edit{
+    margin-top: 2rem;
+}
 
 /* || Ajustes da tabela */
 .tabela-links{

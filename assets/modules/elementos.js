@@ -23,7 +23,11 @@ export const divModalEditar = document.querySelector('.modal');
 export const divModalEditarP = document.querySelector('.modal p');
 export const divModalBoo = document.querySelector('.modal-boolean');
 export const divModalBooP = document.querySelector('.modal-boolean p');
+export const fecharModal = document.querySelector('.fechar-modal');
 
 export const modalBtnSim = document.querySelector('.btn-sim');
 export const modalBtnNao = document.querySelector('.btn-nao');
 
+export const inputPath = document.querySelector('#path');
+export const inpuUrl = document.querySelector('#url-original');
+export const btnSalvarEdit = document.querySelector('.salvar-edit');

@@ -1,7 +1,8 @@
+import { chaves } from "../../config.js";
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
-    logo, loading, dominio, listaLinks,
+    logo, loading, dominio, listaLinks, divModalEditarP, fecharModal,
 } from "../modules/elementos.js";
 
 function exibirMensagens(status, mensagem) {
@@ -45,37 +46,33 @@ logo.onclick = () => { // Clique na logo
     modalBtnNao.addEventListener('click', () => trocaTela(false))
 }
 
-export function carregarLinks() {
-    fetch('../config.json')
-        .then(response => response.json())
-        .then(data => {
-            const apiKey = data.apiKey;
-            const domainId = data.domainId;
-            solicitaAcesso(apiKey, domainId);
-        })
-        .catch(error => console.error('Erro ao buscar config.json:', error));
+export function carregarLinks() { // Recolher keys
+    const apiKey = chaves.apiKey;
+    const domainId = chaves.domainId;
+    solicitaAcesso(apiKey, domainId);
+}
 
-    function solicitaAcesso(apiKey, domainId) {
+function solicitaAcesso(apiKey, domainId) { // Acessar api de links
 
-        const options = {
-            method: 'GET',
-            headers: { accept: 'application/json', Authorization: `${apiKey}` }
-        };
+    const options = {
+        method: 'GET',
+        headers: { accept: 'application/json', Authorization: `${apiKey}` }
+    };
 
-        fetch(`https://api.short.io/api/links?domain_id=${domainId}&limit=30&dateSortOrder=desc`, options)
-            .then(response => {
-                if (response.ok && response.status === 200) {
-                    return response.json();
-                } else { throw new Error('Resposta do servidor: ', response.status) }
-            }).then(data => {
-                listaLinks.innerHTML = `<tr>
+    fetch(`https://api.short.io/api/links?domain_id=${domainId}&limit=30&dateSortOrder=desc`, options)
+        .then(response => {
+            if (response.ok && response.status === 200) {
+                return response.json();
+            } else { throw new Error('Resposta do servidor: ', response.status) }
+        }).then(data => {
+            listaLinks.innerHTML = `<tr>
                 <td colspan="4">Nenhum link disponível</td>
                 </tr>`;
-                montaTabela(data.links);
-            })
-            .catch(err => console.error(err));
-    }
+            montaTabela(data.links);
+        })
+        .catch(err => console.error(err));
 }
+
 
 // || Monta batela de links
 function montaTabela(dados) {
@@ -143,19 +140,33 @@ function montarEventos() {
 function editarLink(linkId, link) {
     console.log(`${linkId} Editado ${link}`)
     divModais.style.display = 'block';
-        divModalBoo.style.display = 'block';
-        divModalBooP.innerText = `Deseja excluir o link: ${link}`;
-    
-        modalBtnSim.addEventListener('click', () => trocaTela(true))
-        modalBtnNao.addEventListener('click', () => trocaTela(false))
+    divModalEditar.style.display = 'block';
+    divModalEditarP.innerText = `Editando: ${link}`;
+
+    fecharModal.addEventListener('click', () => trocaTela(false));
 }
 
 function excluirLink(linkId, link) {
     console.log(`${linkId} Excluido ${link}`)
-        divModais.style.display = 'block';
-        divModalBoo.style.display = 'block';
-        divModalBooP.innerText = `Deseja excluir o link: ${link}`;
-    
-        modalBtnSim.addEventListener('click', () => trocaTela(true))
-        modalBtnNao.addEventListener('click', () => trocaTela(false))
+    divModais.style.display = 'block';
+    divModalBoo.style.display = 'block';
+    divModalBooP.innerText = `Deseja excluir o link: ${link}`;
+
+    modalBtnNao.addEventListener('click', () => trocaTela(false));
+    modalBtnSim.addEventListener('click', () => deletarLink(linkId, link)); // Chamar excluir link
+}
+
+
+// || Delete link
+function deletarLink(linkId, link) {
+    const apiKey = chaves.apiKey;
+    const domainId = chaves.domainId;
+
+    const options = { method: 'DELETE', headers: { Authorization: `${apiKey}` } };
+
+    fetch(`Ïhttps://api.short.io/links/${linkId}`, options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
 }

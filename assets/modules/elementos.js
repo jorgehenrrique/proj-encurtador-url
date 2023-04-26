@@ -20,8 +20,10 @@ export const listaLinks = document.querySelector('#lista-links');
 
 export const divModais = document.querySelector('.modais');
 export const divModalEditar = document.querySelector('.modal');
+export const divModalEditarP = document.querySelector('.modal p');
 export const divModalBoo = document.querySelector('.modal-boolean');
 export const divModalBooP = document.querySelector('.modal-boolean p');
 
 export const modalBtnSim = document.querySelector('.btn-sim');
 export const modalBtnNao = document.querySelector('.btn-nao');
+

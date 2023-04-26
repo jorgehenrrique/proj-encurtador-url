@@ -111,17 +111,24 @@ table{
 th{
     text-align: justify;
     background-color: var(--color-05);
+    min-width: 6rem;
 }
 th, td{
-    /* text-align: center; */
+    text-align: justify;
     white-space: nowrap;
     border-bottom: .1rem solid #7f7f7f46 ;
     padding: .8rem .5rem;
+}
+td{
+    max-width: 15rem;
+    text-overflow: ellipsis; /*adiciona os três pontos para indicar que há mais conteúdo oculto*/
+    overflow: hidden;
+    white-space: nowrap;
 }
 tr:nth-child(2n){
     background-color: #33333314;
 }
 td:nth-child(4){
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }

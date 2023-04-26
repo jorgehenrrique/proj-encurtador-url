@@ -1,6 +1,7 @@
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
-    modalBtnNao, modalBtnSim, telaAjustes, telaContainer, logo, loading, dominio, listaLinks
+    modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
+    logo, loading, dominio, listaLinks,
 } from "../modules/elementos.js";
 
 function exibirMensagens(status, mensagem) {
@@ -36,7 +37,6 @@ function trocaTela(status) { // Sai dos ajustes pela escolha do modal
 }
 
 logo.onclick = () => { // Clique na logo
-    console.log('deu certo')
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = 'Deseja voltar a tela inicial?';
@@ -68,47 +68,94 @@ export function carregarLinks() {
                     return response.json();
                 } else { throw new Error('Resposta do servidor: ', response.status) }
             }).then(data => {
-                // console.log(data.links)
-                // data.links.forEach(element => {
-                //     console.log(element)
-                // });
+                listaLinks.innerHTML = `<tr>
+                <td colspan="4">Nenhum link disponível</td>
+                </tr>`;
                 montaTabela(data.links);
             })
             .catch(err => console.error(err));
     }
 }
 
+// || Monta batela de links
 function montaTabela(dados) {
     let dominios = dados[0].shortURL.split('//');
     dominios = dominios[1].split('/');
     dominios = dominios[0];
 
-    // console.log(dados[0].shortURL)
     dominio.innerHTML = `Domínio: <a href="https://short.io/pt">${dominios}</a>`;
-    listaLinks.innerHTML = `<tr>
-        <td colspan="4">Nenhum link disponível</td>
-    </tr>`;
+    listaLinks.innerHTML = ``;
     dados.forEach(element => {
         // console.log(element)
-        console.log(element.shortURL)
-        console.log(element.originalURL)
-        console.log(element.createdAt)
+        // console.log(element.shortURL)
+        // console.log(element.originalURL)
+        // console.log(element.createdAt)
     });
 
     dados.forEach(element => {
+        let time = formataData(element.createdAt);
+
         listaLinks.innerHTML += `<tr>
         <td>${element.shortURL}</td>
         <td>${element.originalURL}</td>
-        <td>${element.createdAt}</td>
-        <td><img src="assets/icon/conf/edit.png" class="icon-conf" style="width: 20px;" onclick="editarLink(${0})"> <img src="assets/icon/conf/del.png" class="icon-conf" style="width: 20px;" onclick="excluirLink(${1})"></td>
+        <td>${time.date} às ${time.time}</td>
+        <td><img src="assets/icon/conf/edit.png" class="icon-conf edit-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"> <img src="assets/icon/conf/del.png" class="icon-conf delete-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"></td>
     </tr>`
+        montarEventos();
     });
+
+};
+
+// || Formata data
+function formataData(dateTime) {
+    const optionsDate = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+
+    const formattedDate = new Date(dateTime).toLocaleDateString('pt-BR', optionsDate);
+    const formattedTime = new Date(dateTime).toLocaleTimeString('pt-BR', optionsTime);
+
+    return { date: formattedDate, time: formattedTime };
 }
 
-function editarLink(link) {
-    console.log(`${link} Editado`)
+
+// || Chama editar ou excluir links
+function montarEventos() {
+    const editIcon = document.querySelectorAll('.edit-icon');
+    const deletIcon = document.querySelectorAll('.delete-icon');
+
+    editIcon.forEach(icon => {
+        icon.addEventListener('click', () => {
+            const idString = icon.getAttribute('id-string');
+            const link = icon.getAttribute('lin');
+            editarLink(idString, link);
+        });
+    });
+
+    deletIcon.forEach(icon => {
+        icon.addEventListener('click', () => {
+            const idString = icon.getAttribute('id-string');
+            const link = icon.getAttribute('lin');
+            excluirLink(idString, link);
+        });
+    });
+};
+
+function editarLink(linkId, link) {
+    console.log(`${linkId} Editado ${link}`)
+    divModais.style.display = 'block';
+        divModalBoo.style.display = 'block';
+        divModalBooP.innerText = `Deseja excluir o link: ${link}`;
+    
+        modalBtnSim.addEventListener('click', () => trocaTela(true))
+        modalBtnNao.addEventListener('click', () => trocaTela(false))
 }
 
-function excluirLink(link) {
-    console.log(`${link} Excluido`)
+function excluirLink(linkId, link) {
+    console.log(`${linkId} Excluido ${link}`)
+        divModais.style.display = 'block';
+        divModalBoo.style.display = 'block';
+        divModalBooP.innerText = `Deseja excluir o link: ${link}`;
+    
+        modalBtnSim.addEventListener('click', () => trocaTela(true))
+        modalBtnNao.addEventListener('click', () => trocaTela(false))
 }

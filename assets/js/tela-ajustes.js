@@ -1,6 +1,6 @@
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
-    modalBtnNao, modalBtnSim, telaAjustes, telaContainer, logo, loading
+    modalBtnNao, modalBtnSim, telaAjustes, telaContainer, logo, loading, dominio, listaLinks
 } from "../modules/elementos.js";
 
 function exibirMensagens(status, mensagem) {
@@ -51,14 +51,11 @@ export function carregarLinks() {
         .then(data => {
             const apiKey = data.apiKey;
             const domainId = data.domainId;
-            // console.log(apiKey, domainId);
             solicitaAcesso(apiKey, domainId);
         })
         .catch(error => console.error('Erro ao buscar config.json:', error));
 
     function solicitaAcesso(apiKey, domainId) {
-        console.log(apiKey)
-        console.log(domainId)
 
         const options = {
             method: 'GET',
@@ -66,9 +63,52 @@ export function carregarLinks() {
         };
 
         fetch(`https://api.short.io/api/links?domain_id=${domainId}&limit=30&dateSortOrder=desc`, options)
-            .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => {
+                if (response.ok && response.status === 200) {
+                    return response.json();
+                } else { throw new Error('Resposta do servidor: ', response.status) }
+            }).then(data => {
+                // console.log(data.links)
+                // data.links.forEach(element => {
+                //     console.log(element)
+                // });
+                montaTabela(data.links);
+            })
             .catch(err => console.error(err));
     }
 }
 
+function montaTabela(dados) {
+    let dominios = dados[0].shortURL.split('//');
+    dominios = dominios[1].split('/');
+    dominios = dominios[0];
+
+    // console.log(dados[0].shortURL)
+    dominio.innerHTML = `Domínio: <a href="https://short.io/pt">${dominios}</a>`;
+    listaLinks.innerHTML = `<tr>
+        <td colspan="4">Nenhum link disponível</td>
+    </tr>`;
+    dados.forEach(element => {
+        // console.log(element)
+        console.log(element.shortURL)
+        console.log(element.originalURL)
+        console.log(element.createdAt)
+    });
+
+    dados.forEach(element => {
+        listaLinks.innerHTML += `<tr>
+        <td>${element.shortURL}</td>
+        <td>${element.originalURL}</td>
+        <td>${element.createdAt}</td>
+        <td><img src="assets/icon/conf/edit.png" class="icon-conf" style="width: 20px;" onclick="editarLink(${0})"> <img src="assets/icon/conf/del.png" class="icon-conf" style="width: 20px;" onclick="excluirLink(${1})"></td>
+    </tr>`
+    });
+}
+
+function editarLink(link) {
+    console.log(`${link} Editado`)
+}
+
+function excluirLink(link) {
+    console.log(`${link} Excluido`)
+}

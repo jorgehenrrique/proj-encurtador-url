@@ -61,7 +61,7 @@
         </div>
 
     </div>
-    
+
     <div class="ajustes" style="display: none;">
         <img src="assets/icon/conf/conf.png" class="conf icon-conf" style="width: 20px;">
         <h1>Encurtador de URL</h1>
@@ -69,7 +69,7 @@
 
         <div>
             <h2>Gerenciar Links</h2>
-            <p>Domínio: <a href="">link</a></p>
+            <p class="dominio">Domínio: <a href="">link</a></p>
         </div>
 
         <div class="msg" style="display: none;">
@@ -79,21 +79,19 @@
             <table>
                 <thead>
                     <tr>
-                        <th colspan="" id="dadosV">Link Encurtado</th>
-                        <th colspan="" id="dadosV">Link Original</th>
-                        <th colspan="" id="dadosV">Data/Hora</th>
-                        <th colspan="" id="dadosV">Ação</th>
+                        <th>Link Encurtado</th>
+                        <th>Link Original</th>
+                        <th>Data/Hora</th>
+                        <th>Ação</th>
                     </tr>
-                    </thead>
-                    <tbody id="lista-veiculo">
-                        <tr>
-                            <td>C 1, L 1</td>
-                            <td>C 2, L 1</td>
-                            <td>C 3, L 1</td>
-                            <td><img src="assets/icon/conf/edit.png" class="icon-conf" style="width: 20px;"> <img src="assets/icon/conf/del.png" class="icon-conf" style="width: 20px;"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                </thead>
+                <tbody id="lista-links">
+                    <tr>
+                        <td colspan="4">Nenhum link disponível</td>
+                        <!-- <td><img src="assets/icon/conf/edit.png" class="icon-conf" style="width: 20px;"> <img src="assets/icon/conf/del.png" class="icon-conf" style="width: 20px;"></td> -->
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="modais">

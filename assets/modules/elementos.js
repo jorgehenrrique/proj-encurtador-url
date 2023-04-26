@@ -15,6 +15,9 @@ export const btnQr = document.querySelector('.btn-qr');
 export const msg = document.querySelector('.msg');
 
 // || Elementos tela ajustes
+export const dominio = document.querySelector('.dominio');
+export const listaLinks = document.querySelector('#lista-links');
+
 export const divModais = document.querySelector('.modais');
 export const divModalEditar = document.querySelector('.modal');
 export const divModalBoo = document.querySelector('.modal-boolean');

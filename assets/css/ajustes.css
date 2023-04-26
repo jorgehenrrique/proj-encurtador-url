@@ -1,6 +1,6 @@
 /* || Tela ajustes */
 .ajustes{
-    background-color: #ece7c9;
+    background-color: var(--color-03);
     width: 80rem;
     height: fit-content;
     margin: 0 auto;
@@ -28,7 +28,7 @@ h2{
 
 
 /* || Modal */
-.modal-editar {
+.modais {
     position: fixed;
     top: 0;
     left: 0;
@@ -36,11 +36,11 @@ h2{
     width: 100%;
     background-color: #00000080;
     display: none;
-    z-index: 999;
+    z-index: 2;
 }
 
 .modal {
-    background-color: white;
+    background-color: var(--color-03);
     width: 80%;
     max-width: 60rem;
     margin: auto;
@@ -49,6 +49,19 @@ h2{
     border-radius: var(--border-radius);
     text-align: center;
     position: relative;
+    display: none;
+}
+.modal-boolean {
+    background-color: var(--color-03);
+    width: 80%;
+    max-width: 60rem;
+    margin: auto;
+    margin-top: 5rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    position: relative;
+    display: none;
 }
 
 /* .fechar-modal {
@@ -69,8 +82,18 @@ h2{
     border-radius: 3px;
     cursor: pointer;
 }
+.modal-boolean p{
+    color: var(--color-01);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+
 
 /* || Ajustes da tabela */
+.tabela-links{
+    overflow: auto;
+}
 thead{
     font-weight: bold;
 }

@@ -1,26 +1,18 @@
-// fetch('config.json')
-//     .then(response => response.json())
-//     .then(data => {
-//         const apiKey = data.apiKey;
-//         const domainId = data.domainId;
-//         // console.log(apiKey, domainId);
-//         requestKey(data);
-//     })
-//     .catch(error => console.error('Erro ao buscar config.json:', error));
+import {
+    btnEncurtar, conf, inputEncurtar, loading,
+    logo, telaAjustes, telaContainer
+} from "./assets/modules/elementos.js";
 
-
-// function requestKey(env) {
-    //     console.log(env.apiKey)
-    //     console.log(env.domainId)
-    // }
-    
-import { btnEncurtar, inputEncurtar, loading, logo } from "./assets/modules/elementos.js";
-import requestKey from "./assets/modules/requestKey.js";
-// requestKey()
-
-logo.onclick = () => { 
-    console.log('deu certo')
+conf.onclick = () => {
+    if (telaContainer.style.display === '' || telaContainer.style.display === 'flex') {
+        telaAjustes.style.display = 'flex';
+        telaContainer.style.display = 'none';
+    } else {
+        telaContainer.style.display = 'flex';
+        telaAjustes.style.display = 'none';
     }
+}
+
 btnEncurtar.onclick = () => {
     let encurtarLink = inputEncurtar.value.trim();
     if (encurtarLink.length !== 0) {
@@ -29,9 +21,10 @@ btnEncurtar.onclick = () => {
         inputEncurtar.disabled = true;
         loading.style.display = 'block';
         setTimeout(() => {
-        btnEncurtar.disabled = false;
-        inputEncurtar.disabled = false;
-        loading.style.display = 'none';
+            btnEncurtar.disabled = false;
+            inputEncurtar.disabled = false;
+            loading.style.display = 'none';
         }, 2000);
     }
 };
+

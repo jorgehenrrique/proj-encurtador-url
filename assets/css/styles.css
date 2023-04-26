@@ -12,6 +12,10 @@
 }
 body{
     background-color: var(--color-01);
+    position: relative;
+}
+.hide {
+    display: none;
 }
 .container{
     background-color: #ece7c9;
@@ -23,13 +27,13 @@ body{
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    position: relative;
 }
 .conf{
     position: absolute;
     right: 2rem;
     top: 2rem;
     cursor: pointer;
+    z-index: 1;
 }
 h1{
     align-self: center;

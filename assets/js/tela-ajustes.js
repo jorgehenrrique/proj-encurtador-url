@@ -40,7 +40,7 @@ function trocaTela(status) { // Sai dos ajustes e modal
 
 function loadAjustes(status) {
     if (status) {
-        loadingCAjustes.style.display = 'block';
+        loadingCAjustes.style.display = 'flex';
     } else {
         loadingCAjustes.style.display = 'none';
     }

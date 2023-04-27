@@ -1,8 +1,10 @@
 import { chaves } from "../../config.js";
 import {
     aLink,
-    btnEncurtar, btnEncurtarL, conf, containerLoader, divBtnInteracao, divLinkCurto, inputEncurtar, loading,
-    logo, msgInicio, smallData, telaAjustes, telaContainer
+    btnCompartilhar,
+    btnCopiar,
+    btnEncurtar, btnEncurtarL, btnQr, conf, containerLoader, divBtnInteracao, divLinkCurto, divRedeWhatsCom, divRedes, inputEncurtar, loading,
+    logo, msgInicio, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
 
@@ -45,10 +47,8 @@ function loadInicio(status) { // Loading
 }
 
 btnEncurtarL.onclick = () => {
-    
     verificaEntrada();
 };
-
 
 btnEncurtar.onclick = () => verificaEntrada();
 
@@ -86,15 +86,15 @@ function addLink(url) {
         .then(response => {
             if (response.ok && response.status === 200) {
                 return response.json();
+            } else if (response.status === 201) {
+                console.log('pegar qr code')
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
             console.log(response)//////////
             if (response.duplicate) {
-                loadInicio(false);
                 exibirMensagensInicio(false, 'Link informado já existe!');
                 setTimeout(limparMensagens, 3500);
             } else {
-                loadInicio(false);
                 exibirMensagensInicio(true, 'Link adicionado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 // console.log(response.shortURL);/////////
@@ -106,22 +106,44 @@ function addLink(url) {
             loadInicio(false);
             exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
-            loadInicio(false);
         });
 }
 
 function compartilharLinks(linkCurto, data) {
     let criacao = formataData(data);
-    console.log(linkCurto); ///
+    // console.log(linkCurto); ///
     btnEncurtar.style.display = 'none';
     btnEncurtarL.style.display = 'block';
     divLinkCurto.style.display = 'flex';
-    
+
     aLink.innerText = `${linkCurto}`;
     aLink.href = `${linkCurto}`;
     smallData.innerHTML = `Link criado em: ${criacao.date} às ${criacao.time}`;
     containerLoader.style.display = 'none';
 
-    divBtnInteracao.style.display = 'flex';
+    divBtnInteracao.style.display = 'flex'; // botoes de copiar compartilhar e qr
+
+    btnCopiar.onclick = copiaLink; // Copiar link
+    btnCompartilhar.onclick = compartilharLink; // Compartilhar nas redes
+    btnQr.onclick = receberQrCode; // Qr code
+}
+
+function copiaLink() {
+    divRedes.style.display = 'none';
+    divRedeWhatsCom.style.display = 'none';
+
+    navigator.clipboard.writeText(aLink.href);
+    exibirMensagensInicio(true, 'Link copiado com sucesso!');
+    setTimeout(limparMensagens, 3500);
+}
+
+function compartilharLink() {
+    divRedes.style.display = 'flex'; // as 3 redes sociais botoes
+    redeWhats.onclick = 'onClick'; // https://api.whatsapp.com/send?phone=5564999886607
+    redeLinkd.onclick = 'onClick';
+    redeTwitt.onclick = 'onClick';
+}
+
+function receberQrCode() {
 
 }

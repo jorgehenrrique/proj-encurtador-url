@@ -60,12 +60,10 @@ export function carregarLinks() { // Recolher keys
     const apiKey = chaves.apiKey;
     const domainId = chaves.domainId;
     solicitaAcesso(apiKey, domainId);
-    // console.log(apiKey, domainId)
 }
 
 function solicitaAcesso(apiKey, domainId) { // Acessar api de links
-    // loading inicia - tabela
-    loadAjustes(true);
+    loadAjustes(true); // loading inicia
     const options = {
         method: 'GET',
         headers: { accept: 'application/json', Authorization: `${apiKey}` }
@@ -83,10 +81,9 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
             montaTabela(data.links);
         }).catch(err => {
             console.error(err)
-            // loading termina - tabela
             exibirMensagens(false, 'Serviço indisponível!');
             setTimeout(limparMensagens, 3500);
-            loadAjustes(false);
+            loadAjustes(false); // loading termina
         });
 }
 
@@ -100,8 +97,7 @@ function montaTabela(dados) {
     dominio.innerHTML = `Domínio: <a href="https://short.io/pt">${dominios}</a>`;
     listaLinks.innerHTML = ``;
 
-    // loading termina - tabela
-    loadAjustes(false);
+    loadAjustes(false); // loading termina
     dados.forEach(element => {
         let time = formataData(element.createdAt);
 
@@ -174,8 +170,7 @@ function excluirLink(linkId, link) { // Modal confirma excluir link
 
 // || Delete link
 function deletarLink(linkId) {
-    // loading inicia - delete
-    loadAjustes(true);
+    loadAjustes(true); // loading inicia
     const apiKey = chaves.apiKey;
     const options = { method: 'DELETE', headers: { Authorization: `${apiKey}` } };
 
@@ -185,17 +180,17 @@ function deletarLink(linkId) {
                 exibirMensagens(true, 'Link deletado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 return response.json();
+            } else if (response.status === 404) {
+                console.log('URL DELETADO');
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
-            // console.log('Deletado?', response); ////
             trocaTela(false);
-            carregarLinks();
-            // loading termina - delete
-            loadAjustes(false);
+            // carregarLinks(); // Atrasado para evitar erros
+            // loadAjustes(false); // Gerenciado pelo carregar links
+            setTimeout(() => carregarLinks(), 5000);
         }).catch(err => {
             console.error(err)
             trocaTela(false);
-            // loading termina - delete
             loadAjustes(false);
             exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
@@ -213,8 +208,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
 
     btnSalvarEdit.addEventListener('click', () => {
         if (inputPath.value.trim().length === 4 && inputUrl.value.trim().length > 6) {
-            // loading inicia - editar
-            loadAjustes(true);
+            loadAjustes(true); // loading inicia
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
 
@@ -235,18 +229,18 @@ function tratarEdicao(linkId, link, linkOriginal) {
                         exibirMensagens(true, 'Link editado com sucesso!');
                         setTimeout(limparMensagens, 3500);
                         return response.json();
+                    } else if (response.status === 400) {
+                        console.log('LINK EDITADO');
                     } else { throw new Error('Resposta do servidor: ', response.status) }
                 }).then(response => {
-                    // console.log(response)
                     trocaTela(false);
-                    carregarLinks();
-                    // loading ternina - editar
-                    loadAjustes(false);
+                    // carregarLinks(); // Atrasado para evitar erro da api
+                    // loadAjustes(false); // Gerenciado pelo carregar links
+                    setTimeout(() => carregarLinks(), 5000);
                 }).catch(err => {
                     console.error(err)
                     trocaTela(false);
-                    // loading ternina - editar
-                    loadAjustes(false);
+                    loadAjustes(false); // loading ternina
                     exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
                     setTimeout(limparMensagens, 3500);
                 });

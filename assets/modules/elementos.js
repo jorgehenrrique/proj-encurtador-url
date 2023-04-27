@@ -7,6 +7,7 @@ export const inputEncurtar = document.querySelector('.encurtar');
 export const btnEncurtar = document.querySelector('.btn-encurtar');
 export const loading = document.querySelector('.loader');
 export const containerLoader = document.querySelector('.container-loader');
+
 export const msgInicio = document.querySelector('#msg-inicio');
 export const divLinkCurto = document.querySelector('.link-retornado');
 export const aLink = document.querySelector('.link-retornado a');
@@ -19,7 +20,14 @@ export const btnCopiar = document.querySelector('.btn-copiar');
 export const btnCompartilhar = document.querySelector('.btn-compartilhar');
 export const btnQr = document.querySelector('.btn-qr');
 // export const msg = document.querySelector('.msg');
-
+export const divRedes = document.querySelector('.compartilhamento');
+export const redeWhats = document.querySelector('.whats');
+export const redeLinkd = document.querySelector('.linkd');
+export const redeTwitt = document.querySelector('.twitt');
+// export const redeInsta = document.querySelector('.insta');
+export const divRedeWhatsCom = document.querySelector('.compartilha-whats');
+export const btnRedeWhats = document.querySelector('.btn-compartilhar-whsts');
+export const inputRedeWhats = document.querySelector('.whats-num');
 
 
 

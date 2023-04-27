@@ -160,7 +160,7 @@ td:nth-child(4){
     background-color: var(--color-ok);
     color: var(--color-text-ok);
     font-weight: bold;
-    height: 3rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;

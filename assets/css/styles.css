@@ -108,3 +108,22 @@ footer{
     display: flex;
     align-items: center;
 }
+
+/* || Imagens de compartilhamento */
+.compartilhamento{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.compartilha-whats{
+    display: flex;
+}
+.whats-num{
+    height: 4rem;
+    border: solid 0.2rem var(--color-04);
+    border-radius: var(--border-radius);
+    padding: 0 2rem;
+    flex-grow: 8;
+    font-size: 1.8rem;
+    background-color: var(--color-02);
+}

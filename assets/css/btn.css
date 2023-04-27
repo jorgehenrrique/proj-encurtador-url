@@ -23,12 +23,19 @@
 
 /* || Icones dos botoes */
 .btn-encurtar-link{
-    /* flex-grow: 1; */
-    /* display: inline-block; */
     text-align: center;
 }
 .icon-conf{
     width: 2rem;
     display: inline-block;
     vertical-align: middle;
+}
+
+/* || Imagens de compartilhamento */
+.icon-rede{
+    width: 4rem;
+    cursor: pointer;
+}
+.btn-rede{
+    height: 4rem;
 }

@@ -47,6 +47,10 @@ function loadInicio(status) { // Loading
 }
 
 btnEncurtarL.onclick = () => {
+    divQrCode.style.display = 'none';
+    divRedes.style.display = 'none';
+    divRedeWhatsCom.style.display = 'none';
+    // divBtnInteracao.style.display = 'none';
     verificaEntrada();
 };
 
@@ -56,6 +60,7 @@ function verificaEntrada() {
     loadInicio(true);
     let encurtarLink = inputEncurtar.value.trim();
     if (encurtarLink.length > 4) {
+        inputEncurtar.value = '';
         addLink(encurtarLink);
     } else {
         inputEncurtar.value = `INFORME UM URL VÁLIDO!`;
@@ -88,10 +93,14 @@ function addLink(url) {
                 return response.json();
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
-            console.log(response)//////////
+            // console.log(response)//////////
             if (response.duplicate) {
                 exibirMensagensInicio(false, 'Link informado já existe!');
                 setTimeout(limparMensagens, 3500);
+                containerLoader.style.display = 'flex';
+                btnEncurtar.style.display = 'block';
+                btnEncurtarL.style.display = 'none';
+                divLinkCurto.style.display = 'none';
             } else {
                 exibirMensagensInicio(true, 'Link adicionado com sucesso!');
                 setTimeout(limparMensagens, 3500);
@@ -104,6 +113,10 @@ function addLink(url) {
             loadInicio(false);
             exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
+            containerLoader.style.display = 'flex';
+            btnEncurtar.style.display = 'block';
+            btnEncurtarL.style.display = 'none';
+            divLinkCurto.style.display = 'none';
         });
 }
 
@@ -150,7 +163,7 @@ function receberQrCode(linkId) {
     divQrCode.style.display = 'flex';
     divRedes.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
-    console.log(linkId) ////
+    // console.log(linkId) ////
 
     buscarQrCode(linkId)
     function buscarQrCode() {
@@ -167,14 +180,14 @@ function receberQrCode(linkId) {
 
         fetch(`https://api.short.io/links/qr/${linkId}`, options)
             .then(response => {
-                console.log(response) //////
+                // console.log(response) //////
                 return response.blob();
             }).then(response => {
                 const imageUrl = URL.createObjectURL(response);
                 qrImg.src = imageUrl;
                 qrDownload.href = imageUrl;
                 divQrCode.style.display = 'flex';
-                console.log(response)
+                // console.log(response)
                 loadInicio(false); // finalizar loading
                 exibirMensagensInicio(true, 'QR Code criado com sucesso!');
                 setTimeout(limparMensagens, 3500);
@@ -183,6 +196,10 @@ function receberQrCode(linkId) {
                 loadInicio(false); // finalizar loading
                 exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
                 setTimeout(limparMensagens, 3500);
+                containerLoader.style.display = 'flex';
+                btnEncurtar.style.display = 'block';
+                btnEncurtarL.style.display = 'none';
+                divLinkCurto.style.display = 'none';
             });
     }
 }

@@ -20,7 +20,7 @@ function exibirMensagens(status, mensagem) {
     }
 }
 
-function limparMensagens() {
+export function limparMensagens() {
     msgAjustes.style.display = 'none';
 }
 
@@ -38,7 +38,7 @@ function trocaTela(status) { // Sai dos ajustes e modal
     }
 }
 
-function loadAjustes(status) {
+function loadAjustes(status) { // Loading
     if (status) {
         loadingCAjustes.style.display = 'flex';
     } else {

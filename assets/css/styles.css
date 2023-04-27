@@ -69,6 +69,7 @@ h1{
     padding: 0 2rem;
     flex-grow: 8;
     font-size: 1.8rem;
+    background-color: var(--color-02);
 }
 footer{
     position: fixed;

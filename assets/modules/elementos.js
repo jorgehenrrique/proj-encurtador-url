@@ -7,6 +7,9 @@ export const inputEncurtar = document.querySelector('.encurtar');
 export const btnEncurtar = document.querySelector('.btn-encurtar');
 export const loading = document.querySelector('.loader');
 
+
+
+
 // || Elementos tela 2
 export const btnEncurtarLinkImg = document.querySelector('.btn-encurtar-link');
 export const btnCopiar = document.querySelector('.btn-copiar');

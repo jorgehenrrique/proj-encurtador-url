@@ -64,6 +64,7 @@ Projeto utiliza a API: [API short.io](https://app.short.io/settings/integrations
 ```js
 export const chaves = {
     "apiKey": "sua_api_key",
-    "domainId": "seu_id_domain"
+    "domainId": "seu_id_domain",
+    "domainUrl": "seu_url_domain"
 }
 ```

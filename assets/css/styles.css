@@ -5,6 +5,11 @@
     --color-04: #9a8035;
     --color-05: #9c8e54;
 
+    --color-ok: #a7e882d4;
+    --color-err: #d76343d4;
+    --color-text-ok: #06720b;
+    /* --color-text-err: #530000; */
+
     --border-radius: 8px;
 }
 *{
@@ -27,6 +32,7 @@ body{
     flex-direction: column;
     gap: 4rem;
     position: relative;
+    color: var(--color-01);
 }
 .conf{
     position: absolute;
@@ -62,6 +68,7 @@ h1{
     border-radius: var(--border-radius);
     padding: 0 2rem;
     flex-grow: 8;
+    font-size: 1.8rem;
 }
 footer{
     position: fixed;

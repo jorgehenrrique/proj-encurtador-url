@@ -17,6 +17,7 @@ export const msg = document.querySelector('.msg');
 // || Elementos tela ajustes
 export const dominio = document.querySelector('.dominio');
 export const listaLinks = document.querySelector('#lista-links');
+export const msgAjustes = document.querySelector('#msg-ajuste');
 
 export const divModais = document.querySelector('.modais');
 export const divModalEditar = document.querySelector('.modal');

@@ -2,25 +2,24 @@ import { chaves } from "../../config.js";
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
-    logo, loading, dominio, listaLinks, divModalEditarP, fecharModal, inputPath, inputUrl, btnSalvarEdit,
+    logo, loading, dominio, listaLinks, divModalEditarP,
+    fecharModal, inputPath, inputUrl, btnSalvarEdit, msg, msgAjustes,
 } from "../modules/elementos.js";
 
 function exibirMensagens(status, mensagem) {
-    document.querySelector('.mensagem-adc-categoria').innerHTML = mensagem;
-    document.querySelector('.mensagem-adc-despesa').innerHTML = mensagem;
+    msgAjustes.innerText = mensagem;
+    msgAjustes.style.display = 'flex';
     if (status) {
-        document.querySelector('.mensagem-adc-categoria').classList.remove('mensagem-alerta');
-        document.querySelector('.mensagem-adc-categoria').classList.remove('none');
-        document.querySelector('.mensagem-adc-despesa').classList.remove('mensagem-alerta');
-        document.querySelector('.mensagem-adc-despesa').classList.remove('none');
+        msgAjustes.classList.remove('msg-erro');
         // setTimeout(limparMensagens, 3500); // Movido para local de chamada da mensagem, para limpar com tempo indemendente
     } else {
-        document.querySelector('.mensagem-adc-categoria').classList.add('mensagem-alerta');
-        document.querySelector('.mensagem-adc-categoria').classList.remove('none');
-        document.querySelector('.mensagem-adc-despesa').classList.add('mensagem-alerta');
-        document.querySelector('.mensagem-adc-despesa').classList.remove('none');
+        msgAjustes.classList.add('msg-erro');
         // setTimeout(limparMensagens, 3500); // Movido para local de chamada da mensagem, para limpar com tempo indemendente
     }
+}
+
+function limparMensagens() {
+    msgAjustes.style.display = 'none';
 }
 
 function trocaTela(status) { // Sai dos ajustes pela escolha do modal
@@ -83,12 +82,6 @@ function montaTabela(dados) {
 
     dominio.innerHTML = `Domínio: <a href="https://short.io/pt">${dominios}</a>`;
     listaLinks.innerHTML = ``;
-    dados.forEach(element => {
-        // console.log(element)
-        // console.log(element.shortURL)
-        // console.log(element.originalURL)
-        // console.log(element.createdAt)
-    });
 
     dados.forEach(element => {
         let time = formataData(element.createdAt);
@@ -140,7 +133,7 @@ function montarEventos() {
 };
 
 function editarLink(linkId, link, linkOriginal) { // Modal editar link
-    console.log(`${linkId} Editado ${link}`)
+    // console.log(`${linkId} Editado ${link}`)
     divModais.style.display = 'block';
     divModalEditar.style.display = 'block';
     divModalEditarP.innerText = `Editando: ${link}`;
@@ -150,7 +143,7 @@ function editarLink(linkId, link, linkOriginal) { // Modal editar link
 }
 
 function excluirLink(linkId, link) { // Modal confirma excluir link
-    console.log(`${linkId} Excluido ${link}`)
+    // console.log(`${linkId} Excluido ${link}`)
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = `Deseja excluir o link: ${link}`;
@@ -169,14 +162,19 @@ function deletarLink(linkId) {
     fetch(`https://api.short.io/links/${linkId}`, options)
         .then(response => {
             if (response.ok && response.status === 200) {
+                exibirMensagens(true, 'Operação executada com sucesso!');
+                setTimeout(limparMensagens, 3500);
                 return response.json();
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
-            console.log('Deletado?', response);
+            // console.log('Deletado?', response); ////
             trocaTela(false);
             carregarLinks();
-            // tratar mensagens de sucesso
-        }).catch(err => console.error(err));
+        }).catch(err => {
+            console.error(err)
+            exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
+            setTimeout(limparMensagens, 3500);
+        });
 }
 
 
@@ -206,12 +204,18 @@ function tratarEdicao(linkId, link, linkOriginal) {
         fetch(`https://api.short.io/links/${linkId}`, options)
             .then(response => {
                 if (response.ok && response.status === 200) {
+                    exibirMensagens(true, 'Operação executada com sucesso!');
+                    setTimeout(limparMensagens, 3500);
                     return response.json();
                 } else { throw new Error('Resposta do servidor: ', response.status) }
             }).then(response => {
                 console.log(response)
                 trocaTela(false);
                 carregarLinks();
-            }).catch(err => console.error(err));
+            }).catch(err => {
+                console.error(err)
+                exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
+                setTimeout(limparMensagens, 3500);
+            });
     });
 }

@@ -10,6 +10,7 @@
     flex-direction: column;
     gap: 4rem;
     position: relative;
+    color: var(--color-01);
 }
 h2{
     align-self: center;
@@ -92,7 +93,7 @@ form{
     font-weight: bold;
 }
 form input{
-    height: 4rem;
+    height: 3rem;
     border: solid 0.2rem var(--color-04);
     border-radius: var(--border-radius);
     padding: 0 2rem;
@@ -106,7 +107,6 @@ form label{
     width: 30%;
 }
 #url-original{
-    /* height: 4rem; */
     background-color: var(--color-02);
     width: auto;
 }
@@ -152,4 +152,20 @@ tr:nth-child(2n){
 td:nth-child(4){
     display: flex;
     justify-content: space-around;
+}
+
+/* || Ajustes das mensagens */
+.msg{
+    border-radius: var(--border-radius);
+    background-color: var(--color-ok);
+    color: var(--color-text-ok);
+    font-weight: bold;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.msg-erro{
+    background-color: var(--color-err);
+    color: var(--color-02);
 }

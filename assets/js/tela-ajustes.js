@@ -3,7 +3,8 @@ import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
     logo, loading, dominio, listaLinks, divModalEditarP,
-    fecharModal, inputPath, inputUrl, btnSalvarEdit, msg, msgAjustes, formularios,
+    fecharModal, inputPath, inputUrl, btnSalvarEdit, msg,
+    msgAjustes, formularios, loadingCAjustes, loadingAjustes,
 } from "../modules/elementos.js";
 
 // || Prevenir envios de formulario
@@ -37,6 +38,14 @@ function trocaTela(status) { // Sai dos ajustes e modal
     }
 }
 
+function loadAjustes(status) {
+    if (status) {
+        loadingCAjustes.style.display = 'block';
+    } else {
+        loadingCAjustes.style.display = 'none';
+    }
+}
+
 logo.onclick = () => { // Clique na logo
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
@@ -55,6 +64,7 @@ export function carregarLinks() { // Recolher keys
 
 function solicitaAcesso(apiKey, domainId) { // Acessar api de links
     // loading inicia - tabela
+    loadAjustes(true);
     const options = {
         method: 'GET',
         headers: { accept: 'application/json', Authorization: `${apiKey}` }
@@ -73,6 +83,7 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
         }).catch(err => {
             console.error(err)
             // loading termina - tabela
+            loadAjustes(false);
         });
 }
 
@@ -87,6 +98,7 @@ function montaTabela(dados) {
     listaLinks.innerHTML = ``;
 
     // loading termina - tabela
+    loadAjustes(false);
     dados.forEach(element => {
         let time = formataData(element.createdAt);
 
@@ -160,6 +172,7 @@ function excluirLink(linkId, link) { // Modal confirma excluir link
 // || Delete link
 function deletarLink(linkId) {
     // loading inicia - delete
+    loadAjustes(true);
     const apiKey = chaves.apiKey;
     const options = { method: 'DELETE', headers: { Authorization: `${apiKey}` } };
 
@@ -175,10 +188,12 @@ function deletarLink(linkId) {
             trocaTela(false);
             carregarLinks();
             // loading termina - delete
+            loadAjustes(false);
         }).catch(err => {
             console.error(err)
             trocaTela(false);
             // loading termina - delete
+            loadAjustes(false);
             exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
         });
@@ -196,6 +211,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
     btnSalvarEdit.addEventListener('click', () => {
         if (inputPath.value.trim().length === 4 && inputUrl.value.trim().length > 6) {
             // loading inicia - editar
+            loadAjustes(true);
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
 
@@ -222,10 +238,12 @@ function tratarEdicao(linkId, link, linkOriginal) {
                     trocaTela(false);
                     carregarLinks();
                     // loading ternina - editar
+                    loadAjustes(false);
                 }).catch(err => {
                     console.error(err)
                     trocaTela(false);
                     // loading ternina - editar
+                    loadAjustes(false);
                     exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
                     setTimeout(limparMensagens, 3500);
                 });
@@ -248,4 +266,3 @@ function tratarEdicao(linkId, link, linkOriginal) {
         }
     });
 }
-// (inputUrl.value.trim().length < 6)

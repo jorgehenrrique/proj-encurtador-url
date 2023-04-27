@@ -61,8 +61,8 @@ Projeto utiliza a API: [API short.io](https://app.short.io/settings/integrations
 * Feito isso, crie um arquivo chamado: **config.json**
 * E adicione o seguinte:
 
-```json
-{
+```js
+export const chaves = {
     "apiKey": "sua_api_key",
     "domainId": "seu_id_domain"
 }

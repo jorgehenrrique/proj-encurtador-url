@@ -188,7 +188,6 @@ function tratarEdicao(linkId, link, linkOriginal) {
     inputPath.value = `${slug}`;
     inputUrl.value = `${linkOriginal}`;
 
-
     btnSalvarEdit.addEventListener('click', () => {
         slug = inputPath.value.trim();
         linkOriginal = inputUrl.value.trim();
@@ -215,5 +214,4 @@ function tratarEdicao(linkId, link, linkOriginal) {
                 carregarLinks();
             }).catch(err => console.error(err));
     });
-
 }

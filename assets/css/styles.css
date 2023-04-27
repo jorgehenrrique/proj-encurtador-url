@@ -94,6 +94,7 @@ footer{
 .link-retornado a{
     font-weight: bold;
     text-decoration: underline;
+    font-size: 2.5rem;
 }
 
 /* || Container dos 3 btns */
@@ -101,4 +102,9 @@ footer{
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+}
+.btn-interacao button{
+    text-align: center;
+    display: flex;
+    align-items: center;
 }

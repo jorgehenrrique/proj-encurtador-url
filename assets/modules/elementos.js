@@ -6,16 +6,22 @@ export const logo = document.querySelector('#logo');
 export const inputEncurtar = document.querySelector('.encurtar');
 export const btnEncurtar = document.querySelector('.btn-encurtar');
 export const loading = document.querySelector('.loader');
-
-
-
+export const containerLoader = document.querySelector('.container-loader');
+export const msgInicio = document.querySelector('#msg-inicio');
+export const divLinkCurto = document.querySelector('.link-retornado');
+export const aLink = document.querySelector('.link-retornado a');
+export const smallData = document.querySelector('.link-retornado small');
+export const divBtnInteracao = document.querySelector('.btn-interacao');
 
 // || Elementos tela 2
-export const btnEncurtarLinkImg = document.querySelector('.btn-encurtar-link');
+export const btnEncurtarL = document.querySelector('.btn-encurtar-link');
 export const btnCopiar = document.querySelector('.btn-copiar');
 export const btnCompartilhar = document.querySelector('.btn-compartilhar');
 export const btnQr = document.querySelector('.btn-qr');
-export const msg = document.querySelector('.msg');
+// export const msg = document.querySelector('.msg');
+
+
+
 
 // || Elementos tela ajustes
 export const formularios = document.querySelectorAll('form');

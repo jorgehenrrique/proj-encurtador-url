@@ -3,8 +3,8 @@ import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
     logo, loading, dominio, listaLinks, divModalEditarP,
-    fecharModal, inputPath, inputUrl, btnSalvarEdit, msg,
-    msgAjustes, formularios, loadingCAjustes, loadingAjustes,
+    fecharModal, inputPath, inputUrl, btnSalvarEdit,
+    msgAjustes, formularios, loadingCAjustes, loadingAjustes, msgInicio,
 } from "../modules/elementos.js";
 
 // || Prevenir envios de formulario
@@ -22,6 +22,7 @@ function exibirMensagens(status, mensagem) {
 
 export function limparMensagens() {
     msgAjustes.style.display = 'none';
+    msgInicio.style.display = 'none';
 }
 
 function trocaTela(status) { // Sai dos ajustes e modal
@@ -83,6 +84,8 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
         }).catch(err => {
             console.error(err)
             // loading termina - tabela
+            exibirMensagens(false, 'Serviço indisponível!');
+            setTimeout(limparMensagens, 3500);
             loadAjustes(false);
         });
 }
@@ -114,7 +117,7 @@ function montaTabela(dados) {
 };
 
 // || Formata data
-function formataData(dateTime) {
+export function formataData(dateTime) {
     const optionsDate = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
 

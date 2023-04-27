@@ -127,3 +127,15 @@ footer{
     font-size: 1.8rem;
     background-color: var(--color-02);
 }
+
+/* || Tratamento img QR Code */
+.compartilhar-qr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.compartilhar-qr a{
+    margin-top: 1.5rem;
+    font-weight: bold;
+}

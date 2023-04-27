@@ -28,8 +28,9 @@ export const redeTwitt = document.querySelector('.twitt');
 export const divRedeWhatsCom = document.querySelector('.compartilha-whats');
 export const btnRedeWhats = document.querySelector('.btn-compartilhar-whsts');
 export const inputRedeWhats = document.querySelector('.whats-num');
-
-
+export const divQrCode = document.querySelector('.compartilhar-qr');
+export const qrImg = document.querySelector('.qr-img');
+export const qrDownload = document.querySelector('.qr-down');
 
 // || Elementos tela ajustes
 export const formularios = document.querySelectorAll('form');

@@ -3,8 +3,8 @@ import {
     aLink,
     btnCompartilhar,
     btnCopiar,
-    btnEncurtar, btnEncurtarL, btnQr, conf, containerLoader, divBtnInteracao, divLinkCurto, divRedeWhatsCom, divRedes, inputEncurtar, loading,
-    logo, msgInicio, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
+    btnEncurtar, btnEncurtarL, btnQr, conf, containerLoader, divBtnInteracao, divLinkCurto, divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, loading,
+    logo, msgInicio, qrDownload, qrImg, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
 
@@ -33,7 +33,7 @@ function exibirMensagensInicio(status, mensagem) {
 
 function loadInicio(status) { // Loading
     if (status) {
-        containerLoader.style.display = 'flex';
+        // containerLoader.style.display = 'flex';
         loading.style.display = 'block';
         btnEncurtar.disabled = true;
         inputEncurtar.disabled = true;
@@ -86,8 +86,6 @@ function addLink(url) {
         .then(response => {
             if (response.ok && response.status === 200) {
                 return response.json();
-            } else if (response.status === 201) {
-                console.log('pegar qr code')
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
             console.log(response)//////////
@@ -98,7 +96,7 @@ function addLink(url) {
                 exibirMensagensInicio(true, 'Link adicionado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 // console.log(response.shortURL);/////////
-                compartilharLinks(response.shortURL, response.createdAt);
+                compartilharLinks(response.shortURL, response.createdAt, response.idString);
             }
             loadInicio(false);
         }).catch(err => {
@@ -109,7 +107,7 @@ function addLink(url) {
         });
 }
 
-function compartilharLinks(linkCurto, data) {
+function compartilharLinks(linkCurto, data, linkId) {
     let criacao = formataData(data);
     // console.log(linkCurto); ///
     btnEncurtar.style.display = 'none';
@@ -125,11 +123,12 @@ function compartilharLinks(linkCurto, data) {
 
     btnCopiar.onclick = copiaLink; // Copiar link
     btnCompartilhar.onclick = compartilharLink; // Compartilhar nas redes
-    btnQr.onclick = receberQrCode; // Qr code
+    btnQr.onclick = (() => receberQrCode(linkId)); // Qr code
 }
 
 function copiaLink() {
     divRedes.style.display = 'none';
+    divQrCode.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
 
     navigator.clipboard.writeText(aLink.href);
@@ -138,12 +137,52 @@ function copiaLink() {
 }
 
 function compartilharLink() {
+    divQrCode.style.display = 'none'; // qr code
+
     divRedes.style.display = 'flex'; // as 3 redes sociais botoes
     redeWhats.onclick = 'onClick'; // https://api.whatsapp.com/send?phone=5564999886607
     redeLinkd.onclick = 'onClick';
     redeTwitt.onclick = 'onClick';
 }
 
-function receberQrCode() {
+function receberQrCode(linkId) {
+    loadInicio(true); // iniciar loading
+    divQrCode.style.display = 'flex';
+    divRedes.style.display = 'none';
+    divRedeWhatsCom.style.display = 'none';
+    console.log(linkId) ////
 
+    buscarQrCode(linkId)
+    function buscarQrCode() {
+        const apiKey = chaves.apiKey;
+        const options = {
+            method: 'POST',
+            headers: {
+                accept: 'image/png',
+                'content-type': 'application/json',
+                Authorization: `${apiKey}`
+            },
+            body: JSON.stringify({ type: 'png' })
+        };
+
+        fetch(`https://api.short.io/links/qr/${linkId}`, options)
+            .then(response => {
+                console.log(response) //////
+                return response.blob();
+            }).then(response => {
+                const imageUrl = URL.createObjectURL(response);
+                qrImg.src = imageUrl;
+                qrDownload.href = imageUrl;
+                divQrCode.style.display = 'flex';
+                console.log(response)
+                loadInicio(false); // finalizar loading
+                exibirMensagensInicio(true, 'QR Code criado com sucesso!');
+                setTimeout(limparMensagens, 3500);
+            }).catch(err => {
+                console.error(err)
+                loadInicio(false); // finalizar loading
+                exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
+                setTimeout(limparMensagens, 3500);
+            });
+    }
 }

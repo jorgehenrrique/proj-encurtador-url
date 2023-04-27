@@ -15,6 +15,7 @@ export const btnQr = document.querySelector('.btn-qr');
 export const msg = document.querySelector('.msg');
 
 // || Elementos tela ajustes
+export const formularios = document.querySelectorAll('form');
 export const dominio = document.querySelector('.dominio');
 export const listaLinks = document.querySelector('#lista-links');
 export const msgAjustes = document.querySelector('#msg-ajuste');
@@ -32,3 +33,4 @@ export const modalBtnNao = document.querySelector('.btn-nao');
 export const inputPath = document.querySelector('#path');
 export const inputUrl = document.querySelector('#url-original');
 export const btnSalvarEdit = document.querySelector('.salvar-edit');
+

@@ -3,18 +3,19 @@ import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
     logo, loading, dominio, listaLinks, divModalEditarP,
-    fecharModal, inputPath, inputUrl, btnSalvarEdit, msg, msgAjustes,
+    fecharModal, inputPath, inputUrl, btnSalvarEdit, msg, msgAjustes, formularios,
 } from "../modules/elementos.js";
+
+// || Prevenir envios de formulario
+formularios.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
 
 function exibirMensagens(status, mensagem) {
     msgAjustes.innerText = mensagem;
     msgAjustes.style.display = 'flex';
     if (status) {
         msgAjustes.classList.remove('msg-erro');
-        // setTimeout(limparMensagens, 3500); // Movido para local de chamada da mensagem, para limpar com tempo indemendente
     } else {
         msgAjustes.classList.add('msg-erro');
-        // setTimeout(limparMensagens, 3500); // Movido para local de chamada da mensagem, para limpar com tempo indemendente
     }
 }
 
@@ -22,7 +23,7 @@ function limparMensagens() {
     msgAjustes.style.display = 'none';
 }
 
-function trocaTela(status) { // Sai dos ajustes pela escolha do modal
+function trocaTela(status) { // Sai dos ajustes e modal
     if (status) {
         telaContainer.style.display = 'flex';
         telaAjustes.style.display = 'none';
@@ -53,7 +54,7 @@ export function carregarLinks() { // Recolher keys
 }
 
 function solicitaAcesso(apiKey, domainId) { // Acessar api de links
-
+    // loading inicia - tabela
     const options = {
         method: 'GET',
         headers: { accept: 'application/json', Authorization: `${apiKey}` }
@@ -69,8 +70,10 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
                 <td colspan="4">Nenhum link disponível</td>
                 </tr>`;
             montaTabela(data.links);
-        })
-        .catch(err => console.error(err));
+        }).catch(err => {
+            console.error(err)
+            // loading termina - tabela
+        });
 }
 
 
@@ -83,6 +86,7 @@ function montaTabela(dados) {
     dominio.innerHTML = `Domínio: <a href="https://short.io/pt">${dominios}</a>`;
     listaLinks.innerHTML = ``;
 
+    // loading termina - tabela
     dados.forEach(element => {
         let time = formataData(element.createdAt);
 
@@ -155,14 +159,14 @@ function excluirLink(linkId, link) { // Modal confirma excluir link
 
 // || Delete link
 function deletarLink(linkId) {
+    // loading inicia - delete
     const apiKey = chaves.apiKey;
-
     const options = { method: 'DELETE', headers: { Authorization: `${apiKey}` } };
 
     fetch(`https://api.short.io/links/${linkId}`, options)
         .then(response => {
             if (response.ok && response.status === 200) {
-                exibirMensagens(true, 'Operação executada com sucesso!');
+                exibirMensagens(true, 'Link deletado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 return response.json();
             } else { throw new Error('Resposta do servidor: ', response.status) }
@@ -170,8 +174,11 @@ function deletarLink(linkId) {
             // console.log('Deletado?', response); ////
             trocaTela(false);
             carregarLinks();
+            // loading termina - delete
         }).catch(err => {
             console.error(err)
+            trocaTela(false);
+            // loading termina - delete
             exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
         });
@@ -187,35 +194,58 @@ function tratarEdicao(linkId, link, linkOriginal) {
     inputUrl.value = `${linkOriginal}`;
 
     btnSalvarEdit.addEventListener('click', () => {
-        slug = inputPath.value.trim();
-        linkOriginal = inputUrl.value.trim();
+        if (inputPath.value.trim().length === 4 && inputUrl.value.trim().length > 6) {
+            // loading inicia - editar
+            slug = inputPath.value.trim();
+            linkOriginal = inputUrl.value.trim();
 
-        const apiKey = chaves.apiKey;
-        const options = {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                Authorization: `${apiKey}`
-            },
-            body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}` })
-        };
+            const apiKey = chaves.apiKey;
+            const options = {
+                method: 'POST',
+                headers: {
+                    accept: 'application/json',
+                    'content-type': 'application/json',
+                    Authorization: `${apiKey}`
+                },
+                body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}` })
+            };
 
-        fetch(`https://api.short.io/links/${linkId}`, options)
-            .then(response => {
-                if (response.ok && response.status === 200) {
-                    exibirMensagens(true, 'Operação executada com sucesso!');
+            fetch(`https://api.short.io/links/${linkId}`, options)
+                .then(response => {
+                    if (response.ok && response.status === 200) {
+                        exibirMensagens(true, 'Link editado com sucesso!');
+                        setTimeout(limparMensagens, 3500);
+                        return response.json();
+                    } else { throw new Error('Resposta do servidor: ', response.status) }
+                }).then(response => {
+                    // console.log(response)
+                    trocaTela(false);
+                    carregarLinks();
+                    // loading ternina - editar
+                }).catch(err => {
+                    console.error(err)
+                    trocaTela(false);
+                    // loading ternina - editar
+                    exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
                     setTimeout(limparMensagens, 3500);
-                    return response.json();
-                } else { throw new Error('Resposta do servidor: ', response.status) }
-            }).then(response => {
-                console.log(response)
-                trocaTela(false);
-                carregarLinks();
-            }).catch(err => {
-                console.error(err)
-                exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
-                setTimeout(limparMensagens, 3500);
-            });
+                });
+        } else {
+            if (inputPath.value.trim().length < 4) {
+                inputPath.value = `4 DIGITOS!`;
+                inputPath.style.backgroundColor = '#d76343d4';
+                setTimeout(() => {
+                    inputPath.style.backgroundColor = '#f6f3da'
+                    inputPath.value = `${slug}`;
+                }, 1000);
+            } else if (inputUrl.value.trim().length < 6) {
+                inputUrl.value = `URL!`;
+                inputUrl.style.backgroundColor = '#d76343d4';
+                setTimeout(() => {
+                    inputUrl.style.backgroundColor = '#f6f3da'
+                    inputUrl.value = `${linkOriginal}`;
+                }, 1000);
+            }
+        }
     });
 }
+// (inputUrl.value.trim().length < 6)

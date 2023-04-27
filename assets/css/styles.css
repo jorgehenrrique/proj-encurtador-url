@@ -22,7 +22,7 @@ body{
     display: none;
 }
 .container{
-    background-color: #ece7c9;
+    background-color: var(--color-03);
     width: 80rem;
     height: fit-content;
     margin: 0 auto;

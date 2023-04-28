@@ -9,8 +9,6 @@
     --color-dark01: #dcd3bd;
     --color-dark02: #3e3b2c;
     --color-dark03: #26241a;
-    /* --color-dark04: #82764d; */
-    /* --color-dark05: #7d7251; */
 
     --color-ok: #a7e882d4;
     --color-err: #d76343d4;
@@ -28,9 +26,9 @@
 body{
     background-color: var(--color-01);
 }
-.hide {
+/* .hide {
     display: none;
-}
+} */
 .container{
     background-color: var(--color-03);
     width: 80rem;
@@ -63,7 +61,8 @@ h1{
     border-radius: var(--border-radius);
     cursor: pointer;
 }
-/* || Container dos botao + url */
+
+/* || Container do url */
 .campo-url{
     display: flex;
     flex-direction: row;
@@ -71,8 +70,7 @@ h1{
     height: 4rem;
     gap: .5rem;
 }
-/* input */
-.encurtar{
+.encurtar{ /* input */
     height: 4rem;
     border: solid 0.2rem var(--color-04);
     border-radius: var(--border-radius);
@@ -81,17 +79,9 @@ h1{
     font-size: 1.8rem;
     background-color: var(--color-02);
 }
-footer{
-    position: fixed;
-    font-size: 1rem;
-    bottom: 1%;
-    width: 100%;
-    text-align: center;
-    color: var(--color-04);
-}
 
-/* || Primeiro retorno */
-.link-retornado{ /*Link encurtado retornado no div*/
+/* || Retorno de link encurtado */
+.link-retornado{
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -112,7 +102,6 @@ footer{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    /* align-items: center; */
     gap: 1rem;
 }
 .btn-interacao button{
@@ -165,6 +154,14 @@ footer{
 #msg-inicio{
     position: fixed;
     padding: 1rem 2rem;
-    /* top: 10rem; */
     font-size: 1.8rem;
+}
+
+footer{
+    position: fixed;
+    font-size: 1rem;
+    bottom: 1%;
+    width: 100%;
+    text-align: center;
+    color: var(--color-04);
 }

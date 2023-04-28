@@ -57,7 +57,7 @@ h1{
 .campo-url{
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     height: 4rem;
     gap: .5rem;
 }
@@ -100,14 +100,15 @@ footer{
 /* || Container dos 3 btns */
 .btn-interacao{
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-between;
+    /* align-items: center; */
+    gap: 1rem;
 }
 .btn-interacao button{
     text-align: center;
     display: flex;
-    align-items: center;
-}
+    align-items: center;}
 
 /* || Redes de compartilhamento */
 .compartilhamento{ /*Rede sociais*/
@@ -137,10 +138,14 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1rem;
 }
 .compartilhar-qr a{
     margin-top: 1.5rem;
     font-weight: bold;
+}
+.compartilhar-qr img{
+    width: 26rem;
 }
 
 /* || Mensagens de feedback */

@@ -101,10 +101,10 @@ function addLink(url) {
                 btnEncurtar.style.display = 'block';
                 btnEncurtarL.style.display = 'none';
                 divLinkCurto.style.display = 'none';
+                divBtnInteracao.style.display = 'none';
             } else {
                 exibirMensagensInicio(true, 'Link adicionado com sucesso!');
                 setTimeout(limparMensagens, 3500);
-                // console.log(response.shortURL);/////////
                 compartilharLinks(response.shortURL, response.createdAt, response.idString);
             }
             loadInicio(false);
@@ -117,34 +117,34 @@ function addLink(url) {
             btnEncurtar.style.display = 'block';
             btnEncurtarL.style.display = 'none';
             divLinkCurto.style.display = 'none';
+            divBtnInteracao.style.display = 'none';
         });
 }
 
 function compartilharLinks(linkCurto, data, linkId) {
     let criacao = formataData(data);
-    // console.log(linkCurto); ///
-    btnEncurtar.style.display = 'none';
-    btnEncurtarL.style.display = 'block';
-    divLinkCurto.style.display = 'flex';
+    btnEncurtar.style.display = 'none'; // tira btn principal
+    btnEncurtarL.style.display = 'block'; // add btn secundário
+    divLinkCurto.style.display = 'flex';  // exibe url criado
 
     aLink.innerText = `${linkCurto}`;
     aLink.href = `${linkCurto}`;
     smallData.innerHTML = `Link criado em: ${criacao.date} às ${criacao.time}`;
-    containerLoader.style.display = 'none';
+    containerLoader.style.display = 'none'; // container do loader
 
-    divBtnInteracao.style.display = 'flex'; // botoes de copiar compartilhar e qr
+    divBtnInteracao.style.display = 'flex'; // exibe botoes de copiar compartilhar e qr
 
     btnCopiar.onclick = copiaLink; // Copiar link
     btnCompartilhar.onclick = compartilharLink; // Compartilhar nas redes
     btnQr.onclick = (() => receberQrCode(linkId)); // Qr code
 }
 
-function copiaLink() {
+function copiaLink() { // copia link para area de tranferencia
     divRedes.style.display = 'none';
     divQrCode.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
 
-    navigator.clipboard.writeText(aLink.href);
+    navigator.clipboard.writeText(aLink.href); // copiado
     exibirMensagensInicio(true, 'Link copiado com sucesso!');
     setTimeout(limparMensagens, 3500);
 }
@@ -163,7 +163,6 @@ function receberQrCode(linkId) {
     divQrCode.style.display = 'flex';
     divRedes.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
-    // console.log(linkId) ////
 
     buscarQrCode(linkId)
     function buscarQrCode() {
@@ -180,14 +179,12 @@ function receberQrCode(linkId) {
 
         fetch(`https://api.short.io/links/qr/${linkId}`, options)
             .then(response => {
-                // console.log(response) //////
                 return response.blob();
             }).then(response => {
                 const imageUrl = URL.createObjectURL(response);
                 qrImg.src = imageUrl;
                 qrDownload.href = imageUrl;
                 divQrCode.style.display = 'flex';
-                // console.log(response)
                 loadInicio(false); // finalizar loading
                 exibirMensagensInicio(true, 'QR Code criado com sucesso!');
                 setTimeout(limparMensagens, 3500);

@@ -6,11 +6,26 @@
         width: 100%;
     }
 }
-@media screen and (max-width:  490px){ 
-    select{
-        width: 100%;
+@media screen and (max-width:  490px){
+    h1{
+        display: none;
     }
-    header{
-        height: 3.5rem;
+    .btn-interacao{
+        justify-content: center;
+    }
+    .campo-url{
+        gap: 1rem;
+        justify-content: center;
+    }
+    .link-retornado{ /*Link encurtado retornado no div*/
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1rem 0 1rem 0;
+        overflow: auto;
+    }
+    .container{
+        gap: 6rem;
     }
 }

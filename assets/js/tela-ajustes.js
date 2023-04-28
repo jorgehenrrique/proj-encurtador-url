@@ -182,7 +182,7 @@ function deletarLink(linkId) {
                 return response.json();
             } else if (response.status === 404) {
                 console.log('EDITANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
-                location.reload();
+                setTimeout(() => location.reload(), 3000);
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
             trocaTela(false);
@@ -237,7 +237,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
                         return response.json();
                     } else if (response.status === 400) {
                         console.log('DELETANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
-                        location.reload();
+                        setTimeout(() => location.reload(), 3000);
                     } else { throw new Error('Resposta do servidor: ', response.status) }
                 }).then(response => {
                     trocaTela(false);

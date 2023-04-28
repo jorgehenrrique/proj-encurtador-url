@@ -9,6 +9,7 @@ export const loading = document.querySelector('.loader');
 export const containerLoader = document.querySelector('.container-loader');
 
 export const msgInicio = document.querySelector('#msg-inicio');
+// Link encurtado
 export const divLinkCurto = document.querySelector('.link-retornado');
 export const aLink = document.querySelector('.link-retornado a');
 export const smallData = document.querySelector('.link-retornado small');
@@ -19,18 +20,21 @@ export const btnEncurtarL = document.querySelector('.btn-encurtar-link');
 export const btnCopiar = document.querySelector('.btn-copiar');
 export const btnCompartilhar = document.querySelector('.btn-compartilhar');
 export const btnQr = document.querySelector('.btn-qr');
-// export const msg = document.querySelector('.msg');
+// Meios de compartilhamento
 export const divRedes = document.querySelector('.compartilhamento');
 export const redeWhats = document.querySelector('.whats');
 export const redeLinkd = document.querySelector('.linkd');
 export const redeTwitt = document.querySelector('.twitt');
 export const redeFace = document.querySelector('.face');
+// Compartilhar no whatsapp
 export const divRedeWhatsCom = document.querySelector('.compartilha-whats');
 export const btnRedeWhats = document.querySelector('.btn-compartilhar-whsts');
 export const inputRedeWhats = document.querySelector('.whats-num');
+// Compartilhar qrcode
 export const divQrCode = document.querySelector('.compartilhar-qr');
 export const qrImg = document.querySelector('.qr-img');
 export const qrDownload = document.querySelector('.qr-down');
+
 
 // || Elementos tela ajustes
 export const formularios = document.querySelectorAll('form');

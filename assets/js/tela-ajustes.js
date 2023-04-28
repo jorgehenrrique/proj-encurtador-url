@@ -4,7 +4,9 @@ import {
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
     logo, loading, dominio, listaLinks, divModalEditarP,
     fecharModal, inputPath, inputUrl, btnSalvarEdit,
-    msgAjustes, formularios, loadingCAjustes, loadingAjustes, msgInicio,
+    msgAjustes, formularios, loadingCAjustes, loadingAjustes,
+    msgInicio, divQrCode, divRedeWhatsCom, divRedes, containerLoader,
+    btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao,
 } from "../modules/elementos.js";
 
 // || Prevenir envios de formulario
@@ -32,6 +34,15 @@ function trocaTela(status) { // Sai dos ajustes e modal
         divModais.style.display = 'none';
         divModalBoo.style.display = 'none';
         divModalEditar.style.display = 'none';
+        // Alteracoes na tela inicial
+        divQrCode.style.display = 'none';
+        divRedes.style.display = 'none';
+        divRedeWhatsCom.style.display = 'none';
+        containerLoader.style.display = 'flex';
+        btnEncurtar.style.display = 'block';
+        btnEncurtarL.style.display = 'none';
+        divLinkCurto.style.display = 'none';
+        divBtnInteracao.style.display = 'none';
     } else {
         divModais.style.display = 'none';
         divModalBoo.style.display = 'none';
@@ -52,8 +63,8 @@ logo.onclick = () => { // Clique na logo
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = 'Deseja voltar a tela inicial?';
 
-    modalBtnSim.addEventListener('click', () => trocaTela(true))
-    modalBtnNao.addEventListener('click', () => trocaTela(false))
+    modalBtnSim.addEventListener('click', () => trocaTela(true));
+    modalBtnNao.addEventListener('click', () => trocaTela(false));
 }
 
 export function carregarLinks() { // Recolher keys

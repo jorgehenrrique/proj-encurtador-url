@@ -3,7 +3,7 @@ import {
     aLink,
     btnCompartilhar,
     btnCopiar,
-    btnEncurtar, btnEncurtarL, btnQr, conf, containerLoader, divBtnInteracao, divLinkCurto, divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, loading,
+    btnEncurtar, btnEncurtarL, btnQr, btnRedeWhats, conf, containerLoader, divBtnInteracao, divLinkCurto, divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, inputRedeWhats, loading,
     logo, msgInicio, qrDownload, qrImg, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
@@ -59,7 +59,7 @@ btnEncurtar.onclick = () => verificaEntrada();
 function verificaEntrada() {
     loadInicio(true);
     let encurtarLink = inputEncurtar.value.trim();
-    if (encurtarLink.length > 4) {
+    if (encurtarLink.length > 4 && isNaN(encurtarLink)) {
         inputEncurtar.value = '';
         addLink(encurtarLink);
     } else {
@@ -160,10 +160,39 @@ function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
 }
 
 function compartilharViaWhatsApp(url) {
-    // https://api.whatsapp.com/send?phone=5564999886607
     divRedeWhatsCom.style.display = 'flex';
 
+    function desabilitaEntradasWhats(ok) {
+        if (ok) {
+            inputRedeWhats.disabled = true;
+            btnRedeWhats.disabled = true;
+        } else {
+            inputRedeWhats.disabled = false;
+            btnRedeWhats.disabled = false;
+        }
+    }
 
+    btnRedeWhats.addEventListener('click', () => {
+        desabilitaEntradasWhats(true);
+        let numWhats = inputRedeWhats.value.trim();
+        if ( !isNaN(numWhats) && numWhats.length >= 10) {
+            numWhats = '55' + numWhats;
+            const link = `https://api.whatsapp.com/send?phone=${numWhats}&text=${url}`;
+            window.open(link, "_blank");
+            desabilitaEntradasWhats(false);
+
+            exibirMensagensInicio(true, 'Link compartilhado com sucesso!');
+            setTimeout(limparMensagens, 4000);
+        } else {
+            inputRedeWhats.value = `NÚMERO INVÁLIDO!`;
+            inputRedeWhats.style.backgroundColor = '#d76343d4';
+            setTimeout(() => {
+                inputRedeWhats.style.backgroundColor = '#f6f3da'
+                inputRedeWhats.value = ``;
+                desabilitaEntradasWhats(false);
+            }, 1500);
+        }
+    })
 }
 
 

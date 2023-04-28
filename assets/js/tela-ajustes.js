@@ -217,10 +217,9 @@ function tratarEdicao(linkId, link, linkOriginal) {
     inputUrl.value = `${linkOriginal}`;
 
     btnSalvarEdit.addEventListener('click', () => {
-        bloqueiaEdicao();
+        bloqueiaEdicao(true);
         if (inputPath.value.trim().length === 4 && inputUrl.value.trim().length > 6) {
             loadAjustes(true); // loading inicia
-            liberaEdicao();
 
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
@@ -250,6 +249,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
                     trocaTela(false);
                     exibirMensagens(true, 'Link editado com sucesso!');
                     setTimeout(limparMensagens, 3500);
+                    bloqueiaEdicao(false);
                     // carregarLinks(); // Atrasado para evitar erro da api
                     // loadAjustes(false); // Gerenciado pelo carregar links
                     setTimeout(() => carregarLinks(), 1000);
@@ -259,6 +259,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
                     loadAjustes(false); // loading ternina
                     exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
                     setTimeout(limparMensagens, 3500);
+                    bloqueiaEdicao(false);
                 });
         } else {
             if (inputPath.value.trim().length < 4) {
@@ -267,29 +268,29 @@ function tratarEdicao(linkId, link, linkOriginal) {
                 setTimeout(() => {
                     inputPath.style.backgroundColor = '#f6f3da'
                     inputPath.value = `${slug}`;
-                    liberaEdicao();
-                }, 1000);
+                    bloqueiaEdicao(false);
+                }, 1500);
             } else if (inputUrl.value.trim().length < 6) {
-                inputUrl.value = `URL INVÁLIDA!`;
+                inputUrl.value = `URL?!`;
                 inputUrl.style.backgroundColor = '#d76343d4';
                 setTimeout(() => {
                     inputUrl.style.backgroundColor = '#f6f3da'
                     inputUrl.value = `${linkOriginal}`;
-                    liberaEdicao();
-                }, 1000);
+                    bloqueiaEdicao(false);
+                }, 1500);
             }
         }
     });
 }
 
-function bloqueiaEdicao() {
-    btnSalvarEdit.disabled = true;
-    inputPath.disabled = true;
-    inputUrl.disabled = true;
-}
-
-function liberaEdicao() {
-    btnSalvarEdit.disabled = false;
-    inputPath.disabled = false;
-    inputUrl.disabled = false;
+function bloqueiaEdicao(ok) {
+    if (ok) {
+        btnSalvarEdit.disabled = true;
+        inputPath.disabled = true;
+        inputUrl.disabled = true;
+    } else {
+        btnSalvarEdit.disabled = false;
+        inputPath.disabled = false;
+        inputUrl.disabled = false;
+    }
 }

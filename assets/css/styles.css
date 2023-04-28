@@ -5,10 +5,16 @@
     --color-04: #9a8035;
     --color-05: #9c8e54;
 
+    /* Escuro */
+    --color-dark01: #dcd3bd;
+    --color-dark02: #3e3b2c;
+    --color-dark03: #26241a;
+    /* --color-dark04: #82764d; */
+    /* --color-dark05: #7d7251; */
+
     --color-ok: #a7e882d4;
     --color-err: #d76343d4;
     --color-text-ok: #06720b;
-    /* --color-text-err: #530000; */
 
     --border-radius: 8px;
 }
@@ -143,7 +149,9 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 1rem 0;
+    background-color: #f6f3da;
+    border-radius: var(--border-radius);
 }
 .compartilhar-qr a{
     margin-top: 1.5rem;

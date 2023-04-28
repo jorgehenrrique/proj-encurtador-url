@@ -155,7 +155,7 @@ function montarEventos() {
 };
 
 function editarLink(linkId, link, linkOriginal) { // Modal editar link
-    // console.log(`${linkId} Editado ${link}`)
+    // console.log(`${linkId} Editado ${link}`) ///
     divModais.style.display = 'block';
     divModalEditar.style.display = 'block';
     divModalEditarP.innerText = `Editando: ${link}`;
@@ -165,7 +165,7 @@ function editarLink(linkId, link, linkOriginal) { // Modal editar link
 }
 
 function excluirLink(linkId, link) { // Modal confirma excluir link
-    // console.log(`${linkId} Excluido ${link}`)
+    // console.log(`${linkId} Excluido ${link}`) ///
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = `Deseja excluir o link: ${link}`;
@@ -188,16 +188,16 @@ function deletarLink(linkId) {
                 // setTimeout(limparMensagens, 3500);
                 return response.json();
             } else if (response.status === 404) {
-                console.log('EDITANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
-                setTimeout(() => location.reload(), 3000);
-            } else { throw new Error('Resposta do servidor: ', response.status) }
+                console.warn('EDITANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
+                // setTimeout(() => location.reload(), 3000);
+            } else { console.error('Resposta do servidor: ', response.status) }
         }).then(response => {
             trocaTela(false);
             exibirMensagens(true, 'Link deletado com sucesso!');
             setTimeout(limparMensagens, 3500);
-            // carregarLinks(); // Atrasado para evitar erros
+            carregarLinks(); // Atrasado para evitar erros
             // loadAjustes(false); // Gerenciado pelo carregar links
-            setTimeout(() => carregarLinks(), 1000);
+            // setTimeout(() => carregarLinks(), 1000);
         }).catch(err => {
             console.error(err)
             trocaTela(false);
@@ -242,17 +242,17 @@ function tratarEdicao(linkId, link, linkOriginal) {
                         // setTimeout(limparMensagens, 3500);
                         return response.json();
                     } else if (response.status === 400) {
-                        console.log('DELETANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
-                        setTimeout(() => location.reload(), 3000);
-                    } else { throw new Error('Resposta do servidor: ', response.status) }
+                        console.warn('DELETANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
+                        // setTimeout(() => location.reload(), 3000);
+                    } else { console.error('Resposta do servidor: ', response.status) }
                 }).then(response => {
                     trocaTela(false);
                     exibirMensagens(true, 'Link editado com sucesso!');
                     setTimeout(limparMensagens, 3500);
                     bloqueiaEdicao(false);
-                    // carregarLinks(); // Atrasado para evitar erro da api
+                    carregarLinks(); // Atrasado para evitar erro da api
                     // loadAjustes(false); // Gerenciado pelo carregar links
-                    setTimeout(() => carregarLinks(), 1000);
+                    // setTimeout(() => carregarLinks(), 1000);
                 }).catch(err => {
                     console.error(err)
                     trocaTela(false);

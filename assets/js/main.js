@@ -4,7 +4,7 @@ import {
     btnCompartilhar,
     btnCopiar,
     btnEncurtar, btnEncurtarL, btnQr, btnRedeWhats, conf, containerLoader, divBtnInteracao, divLinkCurto, divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, inputRedeWhats, loading,
-    logo, msgInicio, qrDownload, qrImg, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
+    logo, msgInicio, qrDownload, qrImg, redeFace, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
 
@@ -33,7 +33,6 @@ function exibirMensagensInicio(status, mensagem) {
 
 function loadInicio(status) { // Loading
     if (status) {
-        // containerLoader.style.display = 'flex';
         loading.style.display = 'block';
         btnEncurtar.disabled = true;
         inputEncurtar.disabled = true;
@@ -50,7 +49,6 @@ btnEncurtarL.onclick = () => {
     divQrCode.style.display = 'none';
     divRedes.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
-    // divBtnInteracao.style.display = 'none';
     verificaEntrada();
 };
 
@@ -93,7 +91,6 @@ function addLink(url) {
                 return response.json();
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
-            // console.log(response)//////////
             if (response.duplicate) {
                 exibirMensagensInicio(false, 'Link informado já existe!');
                 setTimeout(limparMensagens, 3500);
@@ -103,7 +100,7 @@ function addLink(url) {
                 divLinkCurto.style.display = 'none';
                 divBtnInteracao.style.display = 'none';
             } else {
-                exibirMensagensInicio(true, 'Link adicionado com sucesso!');
+                exibirMensagensInicio(true, 'Link criado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 compartilharLinks(response.shortURL, response.createdAt, response.idString);
             }
@@ -141,9 +138,6 @@ function compartilharLinks(linkCurto, data, linkId) {
 
 // || Copiar link para area de tranferencia
 function copiaLink() {
-    // divRedes.style.display = 'none';
-    // divQrCode.style.display = 'none';
-    // divRedeWhatsCom.style.display = 'none';
 
     navigator.clipboard.writeText(aLink.href); // copiado
     exibirMensagensInicio(true, 'Link copiado com sucesso!');
@@ -152,11 +146,34 @@ function copiaLink() {
 
 function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
     divQrCode.style.display = 'none'; // qr code
-
     divRedes.style.display = 'flex'; // as 3 redes sociais botoes
+
     redeWhats.onclick = (() => compartilharViaWhatsApp(linkCurto));
-    redeLinkd.onclick = 'onClick';
-    redeTwitt.onclick = 'onClick';
+
+    redeLinkd.onclick = (() => {
+        // let urlLink = `https://www.linkedin.com/sharing/share-offsite/?url=${linkCurto}`;
+        // window.open(urlLink);
+        // alternativa ao codigo acima
+        IN.UI.Share().params({
+            url: `${linkCurto}`
+        }).place();
+        exibirMensagensInicio(true, 'Link enviado para o LinkedIn com sucesso!');
+        setTimeout(limparMensagens, 4000);
+    });
+
+    redeTwitt.onclick = (() => {
+        let urlLink = `https://twitter.com/intent/tweet?url=${linkCurto}`;
+        window.open(urlLink);
+        exibirMensagensInicio(true, 'Link enviado para o Twitter com sucesso!');
+        setTimeout(limparMensagens, 4000);
+    });
+
+    redeFace.onclick = (() => {
+        let urlLinkF = `https://www.facebook.com/sharer.php?u=${linkCurto}`;
+        window.open(urlLinkF);
+        exibirMensagensInicio(true, 'Link enviado para o Facebook com sucesso!');
+        setTimeout(limparMensagens, 4000);
+    });
 }
 
 function compartilharViaWhatsApp(url) {
@@ -175,13 +192,13 @@ function compartilharViaWhatsApp(url) {
     btnRedeWhats.addEventListener('click', () => {
         desabilitaEntradasWhats(true);
         let numWhats = inputRedeWhats.value.trim();
-        if ( !isNaN(numWhats) && numWhats.length >= 10) {
+        if (!isNaN(numWhats) && numWhats.length >= 10) {
             numWhats = '55' + numWhats;
             const link = `https://api.whatsapp.com/send?phone=${numWhats}&text=${url}`;
             window.open(link, "_blank");
             desabilitaEntradasWhats(false);
 
-            exibirMensagensInicio(true, 'Link compartilhado com sucesso!');
+            exibirMensagensInicio(true, 'Link compartilhado com WhatsApp com sucesso!');
             setTimeout(limparMensagens, 4000);
         } else {
             inputRedeWhats.value = `NÚMERO INVÁLIDO!`;
@@ -194,11 +211,6 @@ function compartilharViaWhatsApp(url) {
         }
     })
 }
-
-
-
-
-
 
 
 // || Compartilhar QR Code

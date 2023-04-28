@@ -141,9 +141,9 @@ function compartilharLinks(linkCurto, data, linkId) {
 
 // || Copiar link para area de tranferencia
 function copiaLink() {
-    divRedes.style.display = 'none';
-    divQrCode.style.display = 'none';
-    divRedeWhatsCom.style.display = 'none';
+    // divRedes.style.display = 'none';
+    // divQrCode.style.display = 'none';
+    // divRedeWhatsCom.style.display = 'none';
 
     navigator.clipboard.writeText(aLink.href); // copiado
     exibirMensagensInicio(true, 'Link copiado com sucesso!');
@@ -154,7 +154,7 @@ function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
     divQrCode.style.display = 'none'; // qr code
 
     divRedes.style.display = 'flex'; // as 3 redes sociais botoes
-    redeWhats.onclick = compartilharViaWhatsApp(linkCurto);
+    redeWhats.onclick = (() => compartilharViaWhatsApp(linkCurto));
     redeLinkd.onclick = 'onClick';
     redeTwitt.onclick = 'onClick';
 }
@@ -163,7 +163,7 @@ function compartilharViaWhatsApp(url) {
     // https://api.whatsapp.com/send?phone=5564999886607
     divRedeWhatsCom.style.display = 'flex';
 
-    
+
 }
 
 

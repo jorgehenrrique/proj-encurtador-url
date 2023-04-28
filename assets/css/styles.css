@@ -15,6 +15,10 @@
 *{
     outline: 1px solid rgba(255, 0, 0, 0.334);
 }
+/* Efeito */
+.animate__fadeIn {
+    animation-duration: 1s;
+}
 body{
     background-color: var(--color-01);
 }
@@ -113,7 +117,7 @@ footer{
 /* || Redes de compartilhamento */
 .compartilhamento{ /*Rede sociais*/
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-evenly;
     background-color: #f6f3da;
     border-radius: var(--border-radius);
@@ -121,6 +125,7 @@ footer{
 }
 .compartilha-whats{
     display: flex;
+    gap: .5rem;
 }
 .whats-num{
     height: 4rem;
@@ -151,6 +156,7 @@ footer{
 /* || Mensagens de feedback */
 #msg-inicio{
     position: fixed;
-    padding: 0 1rem;
-    top: 10rem;
+    padding: 1rem 2rem;
+    /* top: 10rem; */
+    font-size: 1.8rem;
 }

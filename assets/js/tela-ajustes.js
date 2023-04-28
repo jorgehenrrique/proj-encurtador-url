@@ -78,6 +78,13 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
             listaLinks.innerHTML = `<tr>
                 <td colspan="4">Nenhum link disponível</td>
                 </tr>`;
+
+            if (data.links.length <= 0) {
+                exibirMensagens(false, 'Não há URLs criados ainda!');
+                setTimeout(limparMensagens, 3500);
+                loadAjustes(false);
+                return;
+            }
             montaTabela(data.links);
         }).catch(err => {
             console.error(err)
@@ -94,8 +101,8 @@ function montaTabela(dados) {
     dominios = dominios[1].split('/');
     dominios = dominios[0];
 
-    dominio.innerHTML = `Domínio: <a href="https://short.io/pt">${dominios}</a>`;
-    listaLinks.innerHTML = ``;
+    dominio.innerHTML = `Domínio: <a href="https://short.io/pt" target="_blank">${dominios}</a>`;
+    listaLinks.innerHTML = '';
 
     loadAjustes(false); // loading termina
     dados.forEach(element => {

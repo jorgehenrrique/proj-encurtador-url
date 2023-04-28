@@ -31,7 +31,7 @@
     <title>K - Encurtador de URLs</title>
 </head>
 <body>
-    <div class="container" style="display: non;">
+    <div class="container animate__fadeIn" style="display: non;">
         <img src="assets/icon/conf/conf.png" class="conf icon-conf" style="width: 20px;">
         <h1>Encurtador de URL</h1>
         <img src="./assets/img/img.png" alt="Logo K" class="logo" style="width: 60px;">
@@ -41,7 +41,7 @@
             <button class="btn-encurtar-link btn" style="display: none;"><img src="./assets/icon/conf/link.png" class="icon-conf" style="width: 20px;"></button>
         </div>
 
-        <div class="msg" id="msg-inicio" style="display: none;">
+        <div class="msg animate__fadeIn" id="msg-inicio" style="display: none;">
         </div>
 
         <div class="container-loader" style="display: flex;">
@@ -49,18 +49,18 @@
             <div class="loader" style="display: none;"></div>
         </div>
 
-        <div class="link-retornado" style="display: none;">
+        <div class="link-retornado animate__fadeIn" style="display: none;">
             <a href="" target="_blank"></a>
             <small></small>
         </div>
 
-        <div class="btn-interacao" style="display: none;">
+        <div class="btn-interacao animate__fadeIn" style="display: none;">
             <button class="btn-copiar btn"><img src="assets/icon/conf/copy.png" class="icon-conf" style="width: 20px;"> COPIAR</button>
             <button class="btn-compartilhar btn"><img src="assets/icon/conf/share.png" class="icon-conf" style="width: 20px;"> COMPARTILHAR</button>
             <button class="btn-qr btn"><img src="assets/icon/conf/qr.png" class="icon-conf" style="width: 20px;"> QR CODE</button>
         </div>
 
-        <div class="compartilhamento" style="display: none;">
+        <div class="compartilhamento animate__fadeIn" style="display: none;">
             <button class="whats btn-rede"><img src="assets/icon/rede/whatsapp.png" class="icon-rede" style="width: 40px;"></button>
             <button class="linkd btn-rede"><img src="assets/icon/rede/LinkedIn.svg" class="icon-rede" style="width: 40px;"></button>
             <button class="twitt btn-rede"><img src="assets/icon/rede/Twitter.svg" class="icon-rede" style="width: 40px;"></button>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="compartilha-whats" style="display: none;">
-            <input type="text" placeholder="Digite o número para compartilhar" class="whats-num">
+            <input type="tel" placeholder="Digite seu número de telefone com DDD (xx)xxxxx-xxxx" class="whats-num" minlength="10" maxlength="11" pattern="\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}">
             <button class="btn-compartilhar-whsts btn"><img src="assets/icon/conf/share.png" class="icon-conf" style="width: 20px;"></button>
         </div>
 
@@ -79,24 +79,25 @@
 
     </div>
 
-    <div class="ajustes" style="display: none;">
+    <!-- || Tela ajustes -->
+    <div class="ajustes animate__fadeIn" style="display: none;">
         <img src="assets/icon/conf/conf.png" class="conf icon-conf" style="width: 20px;">
         <h1>Encurtador de URL</h1>
         <img src="./assets/img/img.png" alt="Logo K" class="logo" id="logo" style="width: 60px;">
 
         <div>
             <h2>Gerenciar Links</h2>
-            <p class="dominio">Domínio: <a href="">...</a></p>
+            <p class="dominio">Domínio: <a href="" target="_blank">...</a></p>
         </div>
 
-        <div class="msg msg-erro" id="msg-ajuste" style="display: none;">
+        <div class="msg msg-erro animate__fadeIn" id="msg-ajuste" style="display: none;">
         </div>
 
         <div class="container-ajustes" style="display: none;">
             <span class="loader-ajustes" style="display: non;"></span>
         </div>
 
-        <div class="tabela-links">
+        <div class="tabela-links animate__fadeIn">
             <table>
                 <thead>
                     <tr>
@@ -114,7 +115,7 @@
             </table>
         </div>
 
-        <div class="modais">
+        <div class="modais animate__fadeIn">
             <div class="modal">
                 <p>Editando: </p>
                 <button class="fechar-modal"><img src="assets/icon/conf/not.png" class="icon-conf" style="width: 20px;"></button>

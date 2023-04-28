@@ -135,7 +135,7 @@ th{
     min-width: 6rem;
 }
 th, td{
-    text-align: justify;
+    /* text-align: justify; */
     white-space: nowrap;
     border-bottom: .1rem solid #7f7f7f46 ;
     padding: .8rem .5rem;

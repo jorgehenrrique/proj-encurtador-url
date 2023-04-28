@@ -63,8 +63,9 @@ logo.onclick = () => { // Clique na logo
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = 'Deseja voltar a tela inicial?';
 
-    modalBtnSim.addEventListener('click', () => trocaTela(true));
     modalBtnNao.addEventListener('click', () => trocaTela(false));
+    modalBtnSim.onclick = (() => trocaTela(true));
+    // modalBtnSim.addEventListener('click', () => trocaTela(true)); // alterado pelo metodo acima para evitar conflito
 }
 
 export function carregarLinks() { // Recolher keys
@@ -182,7 +183,8 @@ function excluirLink(linkId, link) { // Modal confirma excluir link
     divModalBooP.innerText = `Deseja excluir o link: ${link}`;
 
     modalBtnNao.addEventListener('click', () => trocaTela(false));
-    modalBtnSim.addEventListener('click', () => deletarLink(linkId));
+    // modalBtnSim.addEventListener('click', () => deletarLink(linkId)); // corrigir esse btn
+    modalBtnSim.onclick = (() => deletarLink(linkId)); // alterado pois metodo acima estava provocando conflito
 }
 
 

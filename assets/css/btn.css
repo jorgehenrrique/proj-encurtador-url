@@ -6,6 +6,7 @@
     min-width: 8.6rem;
     transition: all .2s ease-in-out;
     cursor: pointer;
+    color: #000;
 }
 .btn:hover{
     border-bottom: .5rem solid var(--color-01);

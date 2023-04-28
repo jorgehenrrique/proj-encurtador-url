@@ -135,11 +135,12 @@ function compartilharLinks(linkCurto, data, linkId) {
     divBtnInteracao.style.display = 'flex'; // exibe botoes de copiar compartilhar e qr
 
     btnCopiar.onclick = copiaLink; // Copiar link
-    btnCompartilhar.onclick = compartilharLink; // Compartilhar nas redes
+    btnCompartilhar.onclick = (() => compartilharLink(linkCurto)); // Compartilhar nas redes
     btnQr.onclick = (() => receberQrCode(linkId)); // Qr code
 }
 
-function copiaLink() { // copia link para area de tranferencia
+// || Copiar link para area de tranferencia
+function copiaLink() {
     divRedes.style.display = 'none';
     divQrCode.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
@@ -149,15 +150,29 @@ function copiaLink() { // copia link para area de tranferencia
     setTimeout(limparMensagens, 3500);
 }
 
-function compartilharLink() { // Chama compartilhar nas redes sociais
+function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
     divQrCode.style.display = 'none'; // qr code
 
     divRedes.style.display = 'flex'; // as 3 redes sociais botoes
-    redeWhats.onclick = 'onClick'; // https://api.whatsapp.com/send?phone=5564999886607
+    redeWhats.onclick = compartilharViaWhatsApp(linkCurto);
     redeLinkd.onclick = 'onClick';
     redeTwitt.onclick = 'onClick';
 }
 
+function compartilharViaWhatsApp(url) {
+    // https://api.whatsapp.com/send?phone=5564999886607
+    divRedeWhatsCom.style.display = 'flex';
+
+    
+}
+
+
+
+
+
+
+
+// || Compartilhar QR Code
 function receberQrCode(linkId) {
     loadInicio(true); // iniciar loading
     divQrCode.style.display = 'flex';

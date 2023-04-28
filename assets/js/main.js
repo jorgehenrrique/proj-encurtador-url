@@ -151,12 +151,12 @@ function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
     redeWhats.onclick = (() => compartilharViaWhatsApp(linkCurto));
 
     redeLinkd.onclick = (() => {
-        // let urlLink = `https://www.linkedin.com/sharing/share-offsite/?url=${linkCurto}`;
-        // window.open(urlLink);
+        let urlLink = `https://www.linkedin.com/sharing/share-offsite/?url=${linkCurto}`;
+        window.open(urlLink);
         // alternativa ao codigo acima
-        IN.UI.Share().params({
-            url: `${linkCurto}`
-        }).place();
+        // IN.UI.Share().params({
+            // url: `${linkCurto}`
+        // }).place();
         exibirMensagensInicio(true, 'Link enviado para o LinkedIn com sucesso!');
         setTimeout(limparMensagens, 4000);
     });

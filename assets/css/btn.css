@@ -40,3 +40,6 @@
 .btn-rede{
     height: 4rem;
 }
+.edit-icon, .delete-icon{
+    cursor: pointer;
+}

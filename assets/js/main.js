@@ -149,7 +149,7 @@ function copiaLink() {
     setTimeout(limparMensagens, 3500);
 }
 
-function compartilharLink() {
+function compartilharLink() { // Chama compartilhar nas redes sociais
     divQrCode.style.display = 'none'; // qr code
 
     divRedes.style.display = 'flex'; // as 3 redes sociais botoes

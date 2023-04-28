@@ -139,3 +139,11 @@ footer{
     margin-top: 1.5rem;
     font-weight: bold;
 }
+
+
+/* || Mensagens de feedback */
+#msg-inicio{
+    position: fixed;
+    padding: 0 1rem;
+    top: 10rem;
+}

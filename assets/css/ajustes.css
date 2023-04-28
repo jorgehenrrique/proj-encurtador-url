@@ -8,7 +8,7 @@
     padding: 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 3rem;
     position: relative;
     color: var(--color-01);
 }

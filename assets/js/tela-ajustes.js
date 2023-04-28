@@ -177,17 +177,20 @@ function deletarLink(linkId) {
     fetch(`https://api.short.io/links/${linkId}`, options)
         .then(response => {
             if (response.ok && response.status === 200) {
-                exibirMensagens(true, 'Link deletado com sucesso!');
-                setTimeout(limparMensagens, 3500);
+                // exibirMensagens(true, 'Link deletado com sucesso!');
+                // setTimeout(limparMensagens, 3500);
                 return response.json();
             } else if (response.status === 404) {
-                console.log('URL DELETADO');
+                console.log('EDITANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
+                location.reload();
             } else { throw new Error('Resposta do servidor: ', response.status) }
         }).then(response => {
             trocaTela(false);
+            exibirMensagens(true, 'Link deletado com sucesso!');
+            setTimeout(limparMensagens, 3500);
             // carregarLinks(); // Atrasado para evitar erros
             // loadAjustes(false); // Gerenciado pelo carregar links
-            setTimeout(() => carregarLinks(), 5000);
+            setTimeout(() => carregarLinks(), 1000);
         }).catch(err => {
             console.error(err)
             trocaTela(false);
@@ -207,8 +210,11 @@ function tratarEdicao(linkId, link, linkOriginal) {
     inputUrl.value = `${linkOriginal}`;
 
     btnSalvarEdit.addEventListener('click', () => {
+        bloqueiaEdicao();
         if (inputPath.value.trim().length === 4 && inputUrl.value.trim().length > 6) {
             loadAjustes(true); // loading inicia
+            liberaEdicao();
+
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
 
@@ -226,17 +232,20 @@ function tratarEdicao(linkId, link, linkOriginal) {
             fetch(`https://api.short.io/links/${linkId}`, options)
                 .then(response => {
                     if (response.ok && response.status === 200) {
-                        exibirMensagens(true, 'Link editado com sucesso!');
-                        setTimeout(limparMensagens, 3500);
+                        // exibirMensagens(true, 'Link editado com sucesso!');
+                        // setTimeout(limparMensagens, 3500);
                         return response.json();
                     } else if (response.status === 400) {
-                        console.log('LINK EDITADO');
+                        console.log('DELETANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
+                        location.reload();
                     } else { throw new Error('Resposta do servidor: ', response.status) }
                 }).then(response => {
                     trocaTela(false);
+                    exibirMensagens(true, 'Link editado com sucesso!');
+                    setTimeout(limparMensagens, 3500);
                     // carregarLinks(); // Atrasado para evitar erro da api
                     // loadAjustes(false); // Gerenciado pelo carregar links
-                    setTimeout(() => carregarLinks(), 5000);
+                    setTimeout(() => carregarLinks(), 1000);
                 }).catch(err => {
                     console.error(err)
                     trocaTela(false);
@@ -251,15 +260,29 @@ function tratarEdicao(linkId, link, linkOriginal) {
                 setTimeout(() => {
                     inputPath.style.backgroundColor = '#f6f3da'
                     inputPath.value = `${slug}`;
+                    liberaEdicao();
                 }, 1000);
             } else if (inputUrl.value.trim().length < 6) {
-                inputUrl.value = `URL!`;
+                inputUrl.value = `URL INVÁLIDA!`;
                 inputUrl.style.backgroundColor = '#d76343d4';
                 setTimeout(() => {
                     inputUrl.style.backgroundColor = '#f6f3da'
                     inputUrl.value = `${linkOriginal}`;
+                    liberaEdicao();
                 }, 1000);
             }
         }
     });
+}
+
+function bloqueiaEdicao() {
+    btnSalvarEdit.disabled = true;
+    inputPath.disabled = true;
+    inputUrl.disabled = true;
+}
+
+function liberaEdicao() {
+    btnSalvarEdit.disabled = false;
+    inputPath.disabled = false;
+    inputUrl.disabled = false;
 }

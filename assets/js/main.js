@@ -1,10 +1,10 @@
 import { chaves } from "../../config.js";
 import {
-    aLink,
-    btnCompartilhar,
-    btnCopiar,
-    btnEncurtar, btnEncurtarL, btnQr, btnRedeWhats, conf, containerLoader, divBtnInteracao, divLinkCurto, divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, inputRedeWhats, loading,
-    logo, msgInicio, qrDownload, qrImg, redeFace, redeLinkd, redeTwitt, redeWhats, smallData, telaAjustes, telaContainer
+    aLink, btnCompartilhar, btnCopiar, btnEncurtar, btnEncurtarL, btnQr,
+    btnRedeWhats, conf, containerLoader, divBtnInteracao, divLinkCurto,
+    divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, inputRedeWhats,
+    loading, msgInicio, qrDownload, qrImg, redeFace, redeLinkd, redeTwitt,
+    redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
 
@@ -155,7 +155,7 @@ function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
         window.open(urlLink);
         // alternativa ao codigo acima
         // IN.UI.Share().params({
-            // url: `${linkCurto}`
+        // url: `${linkCurto}`
         // }).place();
         exibirMensagensInicio(true, 'Link enviado para o LinkedIn com sucesso!');
         setTimeout(limparMensagens, 4000);

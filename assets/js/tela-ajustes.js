@@ -4,8 +4,8 @@ import {
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
     logo, loading, dominio, listaLinks, divModalEditarP,
     fecharModal, inputPath, inputUrl, btnSalvarEdit,
-    msgAjustes, formularios, loadingCAjustes, loadingAjustes,
-    msgInicio, divQrCode, divRedeWhatsCom, divRedes, containerLoader,
+    msgAjustes, formularios, loadingCAjustes, msgInicio,
+    divQrCode, divRedeWhatsCom, divRedes, containerLoader,
     btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao,
 } from "../modules/elementos.js";
 

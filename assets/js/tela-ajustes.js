@@ -230,12 +230,14 @@ function tratarEdicao(linkId, link, linkOriginal) {
     inputPath.value = `${slug}`;
     inputUrl.value = `${linkOriginal}`;
 
-    btnSalvarEdit.addEventListener('click', () => {
+    btnSalvarEdit.onclick = (() => {
+    // btnSalvarEdit.addEventListener('click', () => { // estava dando conflito
         console.log(slug.length)
         bloqueiaEdicao(true);
         if (inputPath.value.trim().length === slug.length && inputUrl.value.trim().length > 6) {
             loadAjustes(true); // loading inicia
-
+        console.log(slug)
+        console.log(slug.length)
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
 

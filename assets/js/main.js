@@ -220,7 +220,7 @@ function receberQrCode(linkId) {
     divRedes.style.display = 'none';
     divRedeWhatsCom.style.display = 'none';
 
-    buscarQrCode(linkId)
+    buscarQrCode(linkId);
     function buscarQrCode() {
         const apiKey = chaves.apiKey;
         const options = {
@@ -235,7 +235,12 @@ function receberQrCode(linkId) {
 
         fetch(`https://api.short.io/links/qr/${linkId}`, options)
             .then(response => {
-                return response.blob();
+                console.log(response.status)
+                if (response.status === 201) {
+                    return response.blob();
+                } else if (response.status === 404) {
+                    throw new Error('URL selecionado não existe mais!');
+                }
             }).then(response => {
                 const imageUrl = URL.createObjectURL(response);
                 qrImg.src = imageUrl;
@@ -244,15 +249,18 @@ function receberQrCode(linkId) {
                 loadInicio(false); // finalizar loading
                 exibirMensagensInicio(true, 'QR Code criado com sucesso!');
                 setTimeout(limparMensagens, 3500);
+                loadInicio(false); // finalizar loading
             }).catch(err => {
                 console.error(err)
-                loadInicio(false); // finalizar loading
-                exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
+                exibirMensagensInicio(false, `${err.message}`);
                 setTimeout(limparMensagens, 3500);
                 containerLoader.style.display = 'flex';
                 btnEncurtar.style.display = 'block';
+                divBtnInteracao.style.display = 'none';
+                divQrCode.style.display = 'none';
                 btnEncurtarL.style.display = 'none';
                 divLinkCurto.style.display = 'none';
+                loadInicio(false); // finalizar loading
             });
     }
 }

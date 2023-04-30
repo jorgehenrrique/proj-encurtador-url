@@ -62,9 +62,9 @@ function verificaEntrada() {
         addLink(encurtarLink);
     } else {
         inputEncurtar.value = `INFORME UM URL VÁLIDO!`;
-        inputEncurtar.style.backgroundColor = '#d76343d4';
+        inputEncurtar.style.backgroundColor = '#d7634388';
         setTimeout(() => {
-            inputEncurtar.style.backgroundColor = '#f6f3da'
+            inputEncurtar.style.backgroundColor = 'inherit'
             inputEncurtar.value = `${encurtarLink}`;
             loadInicio(false);
         }, 1000);

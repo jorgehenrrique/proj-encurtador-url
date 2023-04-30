@@ -225,13 +225,15 @@ function deletarLink(linkId) {
 function tratarEdicao(linkId, link, linkOriginal) {
     let slug = link.split('/');
     slug = slug[3];
+    console.log(slug)
 
     inputPath.value = `${slug}`;
     inputUrl.value = `${linkOriginal}`;
 
     btnSalvarEdit.addEventListener('click', () => {
+        console.log(slug.length)
         bloqueiaEdicao(true);
-        if (inputPath.value.trim().length === 4 && inputUrl.value.trim().length > 6) {
+        if (inputPath.value.trim().length === slug.length && inputUrl.value.trim().length > 6) {
             loadAjustes(true); // loading inicia
 
             slug = inputPath.value.trim();
@@ -275,23 +277,26 @@ function tratarEdicao(linkId, link, linkOriginal) {
                     bloqueiaEdicao(false);
                 });
         } else {
-            if (inputPath.value.trim().length < 4) {
-                inputPath.value = `4 DIGITOS!`;
-                inputPath.style.backgroundColor = '#d76343d4';
+            if (inputPath.value.trim().length < slug.length || inputPath.value.trim().length > slug.length) {
+                inputPath.value = `${slug.length} DIGITOS!`;
+                inputPath.style.backgroundColor = '#d7634388';
                 setTimeout(() => {
-                    inputPath.style.backgroundColor = '#f6f3da'
+                    inputPath.style.backgroundColor = 'inherit'
                     inputPath.value = `${slug}`;
                     bloqueiaEdicao(false);
                 }, 1500);
             } else if (inputUrl.value.trim().length < 6) {
                 inputUrl.value = `URL?!`;
-                inputUrl.style.backgroundColor = '#d76343d4';
+                inputUrl.style.backgroundColor = '#d7634388';
                 setTimeout(() => {
-                    inputUrl.style.backgroundColor = '#f6f3da'
+                    inputUrl.style.backgroundColor = 'inherit'
                     inputUrl.value = `${linkOriginal}`;
                     bloqueiaEdicao(false);
                 }, 1500);
             }
+            setTimeout(() => {
+                bloqueiaEdicao(false);
+            }, 1500);
         }
     });
 }

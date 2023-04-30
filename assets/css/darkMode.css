@@ -16,6 +16,10 @@
         color: var(--color-dark01);
         transition: color 0.5s ease;
     }
+    .encurtar{ /* input */
+        background-color: var(--color-dark02);
+        color: var(--color-dark01);
+    }
     .compartilhamento{
         background-color: var(--color-dark03);
         transition: all 0.5s ease;
@@ -44,5 +48,36 @@
     tr:nth-child(2n){
         background-color: #c1c1c114;
         transition: all 0.5s ease;
+    }
+    /* || Modal */
+    .modal {
+        background-color: var(--color-dark02);
+    }
+    .modal-boolean{
+        background-color: var(--color-dark02);
+    }
+    .modal-boolean p{
+        color: var(--color-dark01);
+    }
+    .modal p{
+        color: var(--color-dark01);
+    }
+    form label{
+        color: var(--color-dark01);
+    }
+    form input{
+        background-color: var(--color-dark02);
+        color: var(--color-dark01);
+    }
+    #path{
+        background-color: var(--color-dark02);
+    }
+    #url-original{
+        background-color: var(--color-dark02);
+    }
+
+    /* Botoes */
+    .btn{
+        color: var(--color-dark01);
     }
 }

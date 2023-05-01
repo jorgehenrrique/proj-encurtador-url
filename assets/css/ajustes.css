@@ -101,11 +101,11 @@ form label{
     text-align: left;
     margin-bottom: .5rem;
 }
-#path{
+.path{
     background-color: var(--color-02);
     width: 30%;
 }
-#url-original{
+.url-original{
     background-color: var(--color-02);
     width: auto;
 }

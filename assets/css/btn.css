@@ -44,3 +44,8 @@
 .edit-icon, .delete-icon{
     cursor: pointer;
 }
+
+/* || background-color dos inputs */
+.alerta{
+    background-color: var(--color-err);
+}

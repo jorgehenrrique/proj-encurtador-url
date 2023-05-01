@@ -62,9 +62,13 @@ function verificaEntrada() {
         addLink(encurtarLink);
     } else {
         inputEncurtar.value = `INFORME UM URL VÁLIDO!`;
-        inputEncurtar.style.backgroundColor = '#d7634388';
+        // inputEncurtar.style.backgroundColor = '#d7634388';
+        inputEncurtar.classList.add('alerta');
+        inputEncurtar.classList.add('animate__shakeX');
         setTimeout(() => {
-            inputEncurtar.style.backgroundColor = 'inherit'
+            // inputEncurtar.style.backgroundColor = 'inherit'
+            inputEncurtar.classList.remove('alerta');
+            inputEncurtar.classList.remove('animate__shakeX');
             inputEncurtar.value = `${encurtarLink}`;
             loadInicio(false);
         }, 1000);
@@ -80,8 +84,7 @@ function addLink(url) {
         headers: {
             accept: 'application/json',
             'content-type': 'application/json',
-            Authorization: `${apiKey}`,
-            mode: 'no-cors'
+            Authorization: `${apiKey}`
         },
         body: JSON.stringify({ originalURL: `${url}`, domain: `${domainUrl}` })
     };
@@ -203,9 +206,13 @@ function compartilharViaWhatsApp(url) {
             setTimeout(limparMensagens, 4000);
         } else {
             inputRedeWhats.value = `NÚMERO INVÁLIDO!`;
-            inputRedeWhats.style.backgroundColor = '#d7634388';
+            // inputRedeWhats.style.backgroundColor = '#d7634388';
+            inputRedeWhats.classList.add('alerta');
+            inputRedeWhats.classList.add('animate__shakeX');
             setTimeout(() => {
-                inputRedeWhats.style.backgroundColor = 'inherit'
+                // inputRedeWhats.style.backgroundColor = 'inherit'
+                inputRedeWhats.classList.remove('alerta');
+                inputRedeWhats.classList.remove('animate__shakeX');
                 inputRedeWhats.value = ``;
                 desabilitaEntradasWhats(false);
             }, 1500);
@@ -236,7 +243,7 @@ function receberQrCode(linkId) {
 
         fetch(`https://api.short.io/links/qr/${linkId}`, options)
             .then(response => {
-                console.log(response.status)
+                // console.log(response.status)
                 if (response.status === 201) {
                     return response.blob();
                 } else if (response.status === 404) {
@@ -252,7 +259,7 @@ function receberQrCode(linkId) {
                 setTimeout(limparMensagens, 3500);
                 loadInicio(false); // finalizar loading
             }).catch(err => {
-                console.error(err)
+                // console.error(err)
                 exibirMensagensInicio(false, `${err.message}`);
                 setTimeout(limparMensagens, 3500);
                 containerLoader.style.display = 'flex';

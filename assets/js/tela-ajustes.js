@@ -276,18 +276,26 @@ function tratarEdicao(linkId, link, linkOriginal) {
         } else {
             if (inputPath.value.trim().length < slug.length || inputPath.value.trim().length > slug.length) {
                 inputPath.value = `${slug.length} DIGITOS!`;
-                inputPath.style.backgroundColor = '#d7634388';
+                // inputPath.style.backgroundColor = '#d7634388';
+                inputPath.classList.add('alerta');
+                inputPath.classList.add('animate__shakeX');
                 setTimeout(() => {
-                    inputPath.style.backgroundColor = 'inherit'
+                    // inputPath.style.backgroundColor = 'inherit'
+                    inputPath.classList.remove('alerta');
+                    inputPath.classList.remove('animate__shakeX');
                     inputPath.value = `${slug}`;
                     bloqueiaEdicao(false);
                 }, 1500);
             }
             if (inputUrl.value.trim().length < 6) {
                 inputUrl.value = `URL INVÁLIDO!`;
-                inputUrl.style.backgroundColor = '#d7634388';
+                // inputUrl.style.backgroundColor = '#d7634388';
+                inputUrl.classList.add('alerta');
+                inputUrl.classList.add('animate__shakeX');
                 setTimeout(() => {
-                    inputUrl.style.backgroundColor = 'inherit'
+                    // inputUrl.style.backgroundColor = 'inherit'
+                    inputUrl.classList.remove('alerta');
+                    inputUrl.classList.remove('animate__shakeX');
                     inputUrl.value = `${linkOriginal}`;
                     bloqueiaEdicao(false);
                 }, 1500);

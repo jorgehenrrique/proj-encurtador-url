@@ -57,6 +57,7 @@ h1{
 }
 .logo{
     width: 6rem;
+    height: 6rem;
     align-self: center;
     border-radius: var(--border-radius);
     cursor: pointer;

@@ -288,7 +288,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
                     bloqueiaEdicao(false);
                 }, 1500);
             } else if (inputUrl.value.trim().length < 6) {
-                inputUrl.value = `URL?!`;
+                inputUrl.value = `URL INVÁLIDO!`;
                 inputUrl.style.backgroundColor = '#d7634388';
                 setTimeout(() => {
                     inputUrl.style.backgroundColor = 'inherit'

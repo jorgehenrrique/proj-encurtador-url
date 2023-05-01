@@ -1,8 +1,11 @@
 # Projeto - Encurtador de URL
+
+## Projeto de conclusão de módulo - Javascript Avançado
 ## Sobre o projeto
 
 Criação de Encurtador de URL baseado na API short.io
 
+O protótipo de telas com as especificações: [Miro](https://miro.com/app/board/uXjVMQUy4z4=/)
 Projeto utiliza a API: [API short.io](https://app.short.io/settings/integrations/api-key)
 ### Especificações funcionais:
 * Utilizar com maestria o HTML, CSS e JavaScript (import e export)

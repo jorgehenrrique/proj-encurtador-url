@@ -163,9 +163,16 @@ td:nth-child(4){
     align-items: center;
     justify-content: center;
     box-shadow: 0px 0px 50px 5px #70ef797b;
+    position: relative;
 }
 .msg-erro{
     background-color: var(--color-err);
     color: var(--color-02);
     box-shadow: 0px 0px 50px 5px #ef70857b;
+}
+#msg-ajuste{
+    position: absolute;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    width: fit-content;
 }

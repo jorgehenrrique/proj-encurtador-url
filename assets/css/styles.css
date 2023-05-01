@@ -16,9 +16,9 @@
 
     --border-radius: 8px;
 }
-*{
-    outline: 1px solid rgba(255, 0, 0, 0.334);
-}
+/* *{
+    outline: 1px solid rgba(255, 0, 0, 0.334) !important;
+} */
 /* Efeito */
 .animate__fadeIn {
     animation-duration: 1s;

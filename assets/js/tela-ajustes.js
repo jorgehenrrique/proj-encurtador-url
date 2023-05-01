@@ -225,19 +225,14 @@ function deletarLink(linkId) {
 function tratarEdicao(linkId, link, linkOriginal) {
     let slug = link.split('/');
     slug = slug[3];
-    console.log(slug)
 
     inputPath.value = `${slug}`;
     inputUrl.value = `${linkOriginal}`;
 
     btnSalvarEdit.onclick = (() => {
-    // btnSalvarEdit.addEventListener('click', () => { // estava dando conflito
-        console.log(slug.length)
         bloqueiaEdicao(true);
         if (inputPath.value.trim().length === slug.length && inputUrl.value.trim().length > 6) {
             loadAjustes(true); // loading inicia
-        console.log(slug)
-        console.log(slug.length)
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
 

@@ -80,7 +80,8 @@ function addLink(url) {
         headers: {
             accept: 'application/json',
             'content-type': 'application/json',
-            Authorization: `${apiKey}`
+            Authorization: `${apiKey}`,
+            mode: 'no-cors'
         },
         body: JSON.stringify({ originalURL: `${url}`, domain: `${domainUrl}` })
     };

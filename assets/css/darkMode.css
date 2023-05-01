@@ -33,6 +33,10 @@
         background-color: var(--color-dark03);
         transition: all 0.5s ease;
     }
+    .whats-num{
+        background-color: var(--color-dark02);
+        color: var(--color-dark01);
+    }
 
     /* || Tela ajustes */
     .ajustes{

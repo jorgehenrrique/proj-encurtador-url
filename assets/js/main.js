@@ -57,7 +57,7 @@ btnEncurtar.onclick = () => verificaEntrada();
 function verificaEntrada() {
     loadInicio(true);
     let encurtarLink = inputEncurtar.value.trim();
-    if (encurtarLink.length > 4 && isNaN(encurtarLink)) {
+    if (encurtarLink.length > 4 && isNaN(encurtarLink) && !(encurtarLink.includes(','))) {
         inputEncurtar.value = '';
         addLink(encurtarLink);
     } else {
@@ -202,9 +202,9 @@ function compartilharViaWhatsApp(url) {
             setTimeout(limparMensagens, 4000);
         } else {
             inputRedeWhats.value = `NÚMERO INVÁLIDO!`;
-            inputRedeWhats.style.backgroundColor = '#d76343d4';
+            inputRedeWhats.style.backgroundColor = '#d7634388';
             setTimeout(() => {
-                inputRedeWhats.style.backgroundColor = '#f6f3da'
+                inputRedeWhats.style.backgroundColor = 'inherit'
                 inputRedeWhats.value = ``;
                 desabilitaEntradasWhats(false);
             }, 1500);

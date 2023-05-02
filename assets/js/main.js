@@ -17,6 +17,7 @@ for (let c of conf) {
         } else {
             telaContainer.style.display = 'flex';
             telaAjustes.style.display = 'none';
+            divQrCode.style.display = 'none';
         }
     }
 }

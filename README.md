@@ -72,3 +72,11 @@ export const chaves = {
     "domainUrl": "seu_url_domain"
 }
 ```
+
+### Pode ser necessário instalar uma extensão, para utilizar a API
+
+Extensão: [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=pt-br)
+
+* Depois de instalar a extensão, clique nela e ative a opção **ON** para habilitar
+
+<img src="assets/requisitos/estensao.png">

@@ -19,8 +19,8 @@
 /* *{
     outline: 1px solid rgba(255, 0, 0, 0.334) !important;
 } */
-/* Efeito */
-.animate__fadeIn, .animate__shakeX {
+/* Efeitos */
+.animate__fadeIn, .animate__shakeX, .animate__bounceInLeft{
     animation-duration: 1s;
 }
 body{

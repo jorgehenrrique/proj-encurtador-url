@@ -61,7 +61,7 @@ function verificaEntrada() {
         inputEncurtar.value = '';
         addLink(encurtarLink);
     } else {
-        inputEncurtar.value = `INFORME UM URL VÁLIDO!`;
+        inputEncurtar.value = `INFORME UMA URL VÁLIDA!`;
         inputEncurtar.classList.add('alerta');
         inputEncurtar.classList.add('animate__shakeX');
         setTimeout(() => {

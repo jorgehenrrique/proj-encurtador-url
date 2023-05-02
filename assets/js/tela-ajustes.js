@@ -61,11 +61,10 @@ function loadAjustes(status) { // Loading
 logo.onclick = () => { // Clique na logo
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
-    divModalBooP.innerText = 'Deseja voltar a tela inicial?';
+    divModalBooP.innerText = 'Deseja voltar à tela inicial?';
 
     modalBtnNao.addEventListener('click', () => trocaTela(false));
     modalBtnSim.onclick = (() => trocaTela(true));
-    // modalBtnSim.addEventListener('click', () => trocaTela(true)); // alterado pelo metodo acima para evitar conflito
 }
 
 export function carregarLinks() { // Recolher keys
@@ -90,12 +89,19 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
             listaLinks.innerHTML = `<tr>
                 <td colspan="4">Nenhum link disponível</td>
                 </tr>`;
-
             if (data.links.length <= 0) {
-                exibirMensagens(false, 'Não há URLs criados ainda!');
+                exibirMensagens(false, 'Não há URLs criadas ainda! ');
                 setTimeout(limparMensagens, 3500);
                 loadAjustes(false);
                 return;
+            }
+            if (data.links.length == 1) {
+                exibirMensagens(true, 'URL disponível listada!');
+                setTimeout(limparMensagens, 3500);
+            }
+            if (data.links.length > 1) {
+                exibirMensagens(true, 'URLs disponíveis listadas!');
+                setTimeout(limparMensagens, 3500);
             }
             montaTabela(data.links);
         }).catch(err => {
@@ -138,7 +144,6 @@ export function formataData(dateTime) {
 
     const formattedDate = new Date(dateTime).toLocaleDateString('pt-BR', optionsDate);
     const formattedTime = new Date(dateTime).toLocaleTimeString('pt-BR', optionsTime);
-
     return { date: formattedDate, time: formattedTime };
 }
 
@@ -167,7 +172,6 @@ function montarEventos() {
 };
 
 function editarLink(linkId, link, linkOriginal) { // Modal editar link
-    // console.log(`${linkId} Editado ${link}`) ///
     divModais.style.display = 'block';
     divModalEditar.style.display = 'block';
     divModalEditarP.innerText = `Editando: ${link}`;
@@ -177,14 +181,12 @@ function editarLink(linkId, link, linkOriginal) { // Modal editar link
 }
 
 function excluirLink(linkId, link) { // Modal confirma excluir link
-    // console.log(`${linkId} Excluido ${link}`) ///
     divModais.style.display = 'block';
     divModalBoo.style.display = 'block';
     divModalBooP.innerText = `Deseja excluir o link: ${link}`;
 
     modalBtnNao.addEventListener('click', () => trocaTela(false));
-    // modalBtnSim.addEventListener('click', () => deletarLink(linkId)); // corrigir esse btn
-    modalBtnSim.onclick = (() => deletarLink(linkId)); // alterado pois metodo acima estava provocando conflito
+    modalBtnSim.onclick = (() => deletarLink(linkId));
 }
 
 
@@ -197,20 +199,16 @@ function deletarLink(linkId) {
     fetch(`https://api.short.io/links/${linkId}`, options)
         .then(response => {
             if (response.ok && response.status === 200) {
-                // exibirMensagens(true, 'Link deletado com sucesso!');
-                // setTimeout(limparMensagens, 3500);
+                exibirMensagens(true, 'Link deletado com sucesso!');
+                setTimeout(limparMensagens, 3500);
                 return response.json();
             } else if (response.status === 404) {
-                console.warn('EDITANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
-                // setTimeout(() => location.reload(), 3000);
+                console.warn('EDITANDO LINKS RÁPIDO DEMAIS, ALERTA DE AVISO DA API');
+                setTimeout(() => location.reload(), 10000);
             } else { console.error('Resposta do servidor: ', response.status) }
         }).then(response => {
             trocaTela(false);
-            exibirMensagens(true, 'Link deletado com sucesso!');
-            setTimeout(limparMensagens, 3500);
-            carregarLinks(); // Atrasado para evitar erros
-            // loadAjustes(false); // Gerenciado pelo carregar links
-            // setTimeout(() => carregarLinks(), 1000);
+            carregarLinks();
         }).catch(err => {
             console.error(err)
             trocaTela(false);
@@ -250,21 +248,17 @@ function tratarEdicao(linkId, link, linkOriginal) {
             fetch(`https://api.short.io/links/${linkId}`, options)
                 .then(response => {
                     if (response.ok && response.status === 200) {
-                        // exibirMensagens(true, 'Link editado com sucesso!');
-                        // setTimeout(limparMensagens, 3500);
+                        exibirMensagens(true, 'Link editado com sucesso!');
+                        setTimeout(limparMensagens, 3500);
                         return response.json();
                     } else if (response.status === 400) {
-                        console.warn('DELETANDO LINKS RÁPIDO DE MAIS, ALERTA DE LIMITE DA API');
-                        // setTimeout(() => location.reload(), 3000);
+                        console.warn('DELETANDO LINKS RÁPIDO DEMAIS, ALERTA DE AVISO DA API');
+                        setTimeout(() => location.reload(), 10000);
                     } else { console.error('Resposta do servidor: ', response.status) }
                 }).then(response => {
                     trocaTela(false);
-                    exibirMensagens(true, 'Link editado com sucesso!');
-                    setTimeout(limparMensagens, 3500);
                     bloqueiaEdicao(false);
-                    carregarLinks(); // Atrasado para evitar erro da api
-                    // loadAjustes(false); // Gerenciado pelo carregar links
-                    // setTimeout(() => carregarLinks(), 1000);
+                    carregarLinks(); // recarrega lista de links
                 }).catch(err => {
                     console.error(err)
                     trocaTela(false);
@@ -275,12 +269,10 @@ function tratarEdicao(linkId, link, linkOriginal) {
                 });
         } else {
             if (inputPath.value.trim().length < slug.length || inputPath.value.trim().length > slug.length) {
-                inputPath.value = `${slug.length} DIGITOS!`;
-                // inputPath.style.backgroundColor = '#d7634388';
+                inputPath.value = `${slug.length} DÍGITOS!`;
                 inputPath.classList.add('alerta');
                 inputPath.classList.add('animate__shakeX');
                 setTimeout(() => {
-                    // inputPath.style.backgroundColor = 'inherit'
                     inputPath.classList.remove('alerta');
                     inputPath.classList.remove('animate__shakeX');
                     inputPath.value = `${slug}`;
@@ -288,12 +280,10 @@ function tratarEdicao(linkId, link, linkOriginal) {
                 }, 1500);
             }
             if (inputUrl.value.trim().length < 6) {
-                inputUrl.value = `URL INVÁLIDO!`;
-                // inputUrl.style.backgroundColor = '#d7634388';
+                inputUrl.value = `URL INVÁLIDA!`;
                 inputUrl.classList.add('alerta');
                 inputUrl.classList.add('animate__shakeX');
                 setTimeout(() => {
-                    // inputUrl.style.backgroundColor = 'inherit'
                     inputUrl.classList.remove('alerta');
                     inputUrl.classList.remove('animate__shakeX');
                     inputUrl.value = `${linkOriginal}`;

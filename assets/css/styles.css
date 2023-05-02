@@ -165,4 +165,5 @@ footer{
     width: 100%;
     text-align: center;
     color: var(--color-04);
+    z-index: -1;
 }

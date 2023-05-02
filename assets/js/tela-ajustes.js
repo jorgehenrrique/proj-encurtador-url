@@ -8,6 +8,7 @@ import {
     divQrCode, divRedeWhatsCom, divRedes, containerLoader,
     btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao, inputTitulo,
 } from "../modules/elementos.js";
+import { receberQrCode } from "./main.js";
 
 // || Prevenir envios de formulario
 formularios.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
@@ -222,6 +223,7 @@ function deletarLink(linkId) {
 
 // || Editar link
 function tratarEdicao(linkId, link, linkOriginal, titulo) {
+    receberQrCode(linkId);
     let slug = link.split('/');
     slug = slug[3];
 

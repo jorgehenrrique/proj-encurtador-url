@@ -19,9 +19,11 @@
     .encurtar{ /* input */
         background-color: var(--color-dark03);
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
     .compartilhamento{
         background-color: var(--color-dark03);
+        transition: all 0.5s ease;
         transition: all 0.5s ease;
     }
     .link-retornado{
@@ -29,13 +31,14 @@
         color: var(--color-dark01);
         transition: all 0.5s ease;
     }
-    .compartilhar-qr{
+    .compartilhar-qr, .qr-code{
         background-color: var(--color-dark03);
         transition: all 0.5s ease;
     }
     .whats-num{
         background-color: var(--color-dark03);
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
 
     /* || Tela ajustes */
@@ -56,32 +59,37 @@
     /* || Modal */
     .modal {
         background-color: var(--color-dark02);
+        transition: all 0.5s ease;
     }
     .modal-boolean{
         background-color: var(--color-dark02);
+        transition: all 0.5s ease;
     }
     .modal-boolean p{
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
     .modal p{
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
     form label{
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
     form input{
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
     .path, .titulo, .url-original{
         background-color: var(--color-dark03);
+        transition: all 0.5s ease;
     }
-    /* .url-original{
-        background-color: var(--color-dark03);
-    } */
 
     /* Botoes */
     .btn{
         color: var(--color-dark01);
+        transition: all 0.5s ease;
     }
 
     /* || background-color dos inputs */

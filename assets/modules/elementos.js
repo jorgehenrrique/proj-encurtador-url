@@ -58,3 +58,5 @@ export const inputPath = document.querySelector('#path');
 export const inputTitulo = document.querySelector('#titulo');
 export const inputUrl = document.querySelector('#url-original');
 export const btnSalvarEdit = document.querySelector('.salvar-edit');
+export const qrImgModal = document.querySelector('.qr-img02');
+export const qrDownloadModal = document.querySelector('.qr-down02');

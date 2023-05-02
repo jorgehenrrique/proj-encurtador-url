@@ -3,7 +3,7 @@ import {
     aLink, btnCompartilhar, btnCopiar, btnEncurtar, btnEncurtarL, btnQr,
     btnRedeWhats, conf, containerLoader, divBtnInteracao, divLinkCurto,
     divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, inputRedeWhats,
-    loading, msgInicio, qrDownload, qrImg, redeFace, redeLinkd, redeTwitt,
+    loading, msgInicio, qrDownload, qrDownloadModal, qrImg, qrImgModal, redeFace, redeLinkd, redeTwitt,
     redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
@@ -213,7 +213,7 @@ function compartilharViaWhatsApp(url) {
 
 
 // || Compartilhar QR Code
-function receberQrCode(linkId) {
+export function receberQrCode(linkId) {
     loadInicio(true); // iniciar loading
     divQrCode.style.display = 'flex';
     divRedes.style.display = 'none';
@@ -244,6 +244,9 @@ function receberQrCode(linkId) {
                 qrImg.src = imageUrl;
                 qrDownload.href = imageUrl;
                 divQrCode.style.display = 'flex';
+                // Modal ajustes
+                qrImgModal.src = imageUrl;
+                qrDownloadModal.href = imageUrl;
                 loadInicio(false); // finalizar loading
                 exibirMensagensInicio(true, 'QR Code criado com sucesso!');
                 setTimeout(limparMensagens, 3500);

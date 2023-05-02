@@ -76,11 +76,31 @@ h2{
     color: var(--color-01);
     font-weight: bold;
     margin-bottom: 1rem;
+    font-size: 1.6rem;
 }
 .modal p{
     color: var(--color-01);
     font-weight: bold;
     margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+/* QR-Code do modal */
+.qr-code{
+    margin-top: 2rem;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius);
+    background-color: var(--color-02);
+}
+.qr-code a{
+    margin-top: 1.5rem;
+    font-weight: bold;
+}
+.qr-code img{
+    width: 20rem;
 }
 
 /* || Form do modal */
@@ -105,7 +125,6 @@ form label{
     background-color: var(--color-02);
     width: 30%;
     margin-bottom: .5rem;
-    /* margin-bottom: 2rem; */
 }
 .titulo{
     background-color: var(--color-02);
@@ -179,6 +198,5 @@ td:nth-child(4){
 #msg-ajuste{
     position: absolute;
     padding: 1rem 2rem;
-    /* font-size: 1.8rem; */
     width: fit-content;
 }

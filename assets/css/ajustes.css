@@ -88,7 +88,7 @@ form{
     display: flex;
     flex-direction: column;
     color: var(--color-01);
-    margin-top: 2rem;
+    margin-top: .5rem;
     font-weight: bold;
 }
 form input{
@@ -102,6 +102,12 @@ form label{
     margin-bottom: .5rem;
 }
 .path{
+    background-color: var(--color-02);
+    width: 30%;
+    margin-bottom: .5rem;
+    /* margin-bottom: 2rem; */
+}
+.titulo{
     background-color: var(--color-02);
     width: 30%;
 }

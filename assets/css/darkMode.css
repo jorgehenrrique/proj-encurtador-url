@@ -72,12 +72,12 @@
     form input{
         color: var(--color-dark01);
     }
-    .path{
+    .path, .titulo, .url-original{
         background-color: var(--color-dark03);
     }
-    .url-original{
+    /* .url-original{
         background-color: var(--color-dark03);
-    }
+    } */
 
     /* Botoes */
     .btn{

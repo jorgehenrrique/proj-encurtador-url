@@ -6,7 +6,7 @@ import {
     fecharModal, inputPath, inputUrl, btnSalvarEdit,
     msgAjustes, formularios, loadingCAjustes, msgInicio,
     divQrCode, divRedeWhatsCom, divRedes, containerLoader,
-    btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao,
+    btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao, inputTitulo,
 } from "../modules/elementos.js";
 
 // || Prevenir envios de formulario
@@ -130,7 +130,7 @@ function montaTabela(dados) {
         <td>${element.shortURL}</td>
         <td>${element.originalURL}</td>
         <td>${time.date} às ${time.time}</td>
-        <td><img src="assets/icon/conf/edit.png" class="icon-conf edit-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}" lin2="${element.originalURL}"> <img src="assets/icon/conf/del.png" class="icon-conf delete-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"></td>
+        <td><img src="assets/icon/conf/edit.png" class="icon-conf edit-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}" lin2="${element.originalURL}" tit="${element.title}"> <img src="assets/icon/conf/del.png" class="icon-conf delete-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"></td>
     </tr>`
         montarEventos();
     });
@@ -158,7 +158,8 @@ function montarEventos() {
             const idString = icon.getAttribute('id-string');
             const link = icon.getAttribute('lin');
             const linkOriginal = icon.getAttribute('lin2');
-            editarLink(idString, link, linkOriginal);
+            const titulo = icon.getAttribute('tit');
+            editarLink(idString, link, linkOriginal, titulo);
         });
     });
 
@@ -171,13 +172,13 @@ function montarEventos() {
     });
 };
 
-function editarLink(linkId, link, linkOriginal) { // Modal editar link
+function editarLink(linkId, link, linkOriginal, titulo) { // Modal editar link
     divModais.style.display = 'block';
     divModalEditar.style.display = 'block';
     divModalEditarP.innerText = `Editando: ${link}`;
 
     fecharModal.addEventListener('click', () => trocaTela(false));
-    tratarEdicao(linkId, link, linkOriginal);
+    tratarEdicao(linkId, link, linkOriginal, titulo);
 }
 
 function excluirLink(linkId, link) { // Modal confirma excluir link
@@ -220,12 +221,18 @@ function deletarLink(linkId) {
 
 
 // || Editar link
-function tratarEdicao(linkId, link, linkOriginal) {
+function tratarEdicao(linkId, link, linkOriginal, titulo) {
     let slug = link.split('/');
     slug = slug[3];
 
     inputPath.value = `${slug}`;
     inputUrl.value = `${linkOriginal}`;
+    inputTitulo.value = `${titulo}`;
+    if (titulo === 'undefined') {
+        inputTitulo.value = 'Sem título';
+    } else {
+        inputTitulo.value = `${titulo}`;
+    }
 
     btnSalvarEdit.onclick = (() => {
         bloqueiaEdicao(true);
@@ -233,6 +240,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
             loadAjustes(true); // loading inicia
             slug = inputPath.value.trim();
             linkOriginal = inputUrl.value.trim();
+            titulo = inputTitulo.value.trim();
 
             const apiKey = chaves.apiKey;
             const options = {
@@ -242,7 +250,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
                     'content-type': 'application/json',
                     Authorization: `${apiKey}`
                 },
-                body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}` })
+                body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}`, title: `${titulo}` })
             };
 
             fetch(`https://api.short.io/links/${linkId}`, options)
@@ -256,6 +264,7 @@ function tratarEdicao(linkId, link, linkOriginal) {
                         setTimeout(() => location.reload(), 10000);
                     } else { console.error('Resposta do servidor: ', response.status) }
                 }).then(response => {
+                    console.log(response) //////
                     trocaTela(false);
                     bloqueiaEdicao(false);
                     carregarLinks(); // recarrega lista de links

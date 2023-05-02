@@ -55,5 +55,6 @@ export const modalBtnSim = document.querySelector('.btn-sim');
 export const modalBtnNao = document.querySelector('.btn-nao');
 // Input modal
 export const inputPath = document.querySelector('#path');
+export const inputTitulo = document.querySelector('#titulo');
 export const inputUrl = document.querySelector('#url-original');
 export const btnSalvarEdit = document.querySelector('.salvar-edit');

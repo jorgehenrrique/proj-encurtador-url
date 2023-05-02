@@ -16,9 +16,7 @@
 
     --border-radius: 8px;
 }
-/* *{
-    outline: 1px solid rgba(255, 0, 0, 0.334) !important;
-} */
+
 /* Efeitos */
 .animate__fadeIn, .animate__shakeX, .animate__bounceInLeft{
     animation-duration: 1s;
@@ -26,9 +24,6 @@
 body{
     background-color: var(--color-01);
 }
-/* .hide {
-    display: none;
-} */
 .container{
     background-color: var(--color-03);
     width: 80rem;

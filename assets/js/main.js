@@ -62,11 +62,9 @@ function verificaEntrada() {
         addLink(encurtarLink);
     } else {
         inputEncurtar.value = `INFORME UM URL VÁLIDO!`;
-        // inputEncurtar.style.backgroundColor = '#d7634388';
         inputEncurtar.classList.add('alerta');
         inputEncurtar.classList.add('animate__shakeX');
         setTimeout(() => {
-            // inputEncurtar.style.backgroundColor = 'inherit'
             inputEncurtar.classList.remove('alerta');
             inputEncurtar.classList.remove('animate__shakeX');
             inputEncurtar.value = `${encurtarLink}`;
@@ -110,7 +108,7 @@ function addLink(url) {
             }
             loadInicio(false);
         }).catch(err => {
-            console.error(err)
+            console.error(err.message)
             loadInicio(false);
             exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
@@ -131,9 +129,9 @@ function compartilharLinks(linkCurto, data, linkId) {
     aLink.innerText = `${linkCurto}`;
     aLink.href = `${linkCurto}`;
     smallData.innerHTML = `Link criado em: ${criacao.date} às ${criacao.time}`;
+    
     containerLoader.style.display = 'none'; // container do loader
-
-    divBtnInteracao.style.display = 'flex'; // exibe botoes de copiar compartilhar e qr
+    divBtnInteracao.style.display = 'flex'; // exibe botoes de copiar, compartilhar e qr
 
     btnCopiar.onclick = copiaLink; // Copiar link
     btnCompartilhar.onclick = (() => compartilharLink(linkCurto)); // Compartilhar nas redes
@@ -142,25 +140,20 @@ function compartilharLinks(linkCurto, data, linkId) {
 
 // || Copiar link para area de tranferencia
 function copiaLink() {
-
     navigator.clipboard.writeText(aLink.href); // copiado
     exibirMensagensInicio(true, 'Link copiado com sucesso!');
     setTimeout(limparMensagens, 3500);
 }
 
-function compartilharLink(linkCurto) { // Chama compartilhar nas redes sociais
+function compartilharLink(linkCurto) { // chama compartilhar nas redes sociais
     divQrCode.style.display = 'none'; // qr code
-    divRedes.style.display = 'flex'; // as 3 redes sociais botoes
+    divRedes.style.display = 'flex'; // redes sociais botoes
 
     redeWhats.onclick = (() => compartilharViaWhatsApp(linkCurto));
 
     redeLinkd.onclick = (() => {
         let urlLink = `https://www.linkedin.com/sharing/share-offsite/?url=${linkCurto}`;
         window.open(urlLink);
-        // alternativa ao codigo acima
-        // IN.UI.Share().params({
-        // url: `${linkCurto}`
-        // }).place();
         exibirMensagensInicio(true, 'Link enviado para o LinkedIn com sucesso!');
         setTimeout(limparMensagens, 4000);
     });
@@ -206,11 +199,9 @@ function compartilharViaWhatsApp(url) {
             setTimeout(limparMensagens, 4000);
         } else {
             inputRedeWhats.value = `NÚMERO INVÁLIDO!`;
-            // inputRedeWhats.style.backgroundColor = '#d7634388';
             inputRedeWhats.classList.add('alerta');
             inputRedeWhats.classList.add('animate__shakeX');
             setTimeout(() => {
-                // inputRedeWhats.style.backgroundColor = 'inherit'
                 inputRedeWhats.classList.remove('alerta');
                 inputRedeWhats.classList.remove('animate__shakeX');
                 inputRedeWhats.value = ``;
@@ -243,7 +234,6 @@ function receberQrCode(linkId) {
 
         fetch(`https://api.short.io/links/qr/${linkId}`, options)
             .then(response => {
-                // console.log(response.status)
                 if (response.status === 201) {
                     return response.blob();
                 } else if (response.status === 404) {
@@ -259,7 +249,6 @@ function receberQrCode(linkId) {
                 setTimeout(limparMensagens, 3500);
                 loadInicio(false); // finalizar loading
             }).catch(err => {
-                // console.error(err)
                 exibirMensagensInicio(false, `${err.message}`);
                 setTimeout(limparMensagens, 3500);
                 containerLoader.style.display = 'flex';

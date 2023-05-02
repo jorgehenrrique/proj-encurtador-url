@@ -57,4 +57,3 @@ export const modalBtnNao = document.querySelector('.btn-nao');
 export const inputPath = document.querySelector('#path');
 export const inputUrl = document.querySelector('#url-original');
 export const btnSalvarEdit = document.querySelector('.salvar-edit');
-

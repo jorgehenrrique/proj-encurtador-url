@@ -149,9 +149,10 @@ table{
     min-width: 30rem;
     font-size: 1.5rem;
     overflow: auto;
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 100%;
     text-align: center;
+    border-spacing: .1rem 0;
 }
 th{
     text-align: justify;

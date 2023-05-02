@@ -108,7 +108,7 @@ function addLink(url) {
             }
             loadInicio(false);
         }).catch(err => {
-            console.error(err.message)
+            console.error(err.message) //////////////////////////////////
             loadInicio(false);
             exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
@@ -247,6 +247,7 @@ export function receberQrCode(linkId) {
                 // Modal ajustes
                 qrImgModal.src = imageUrl;
                 qrDownloadModal.href = imageUrl;
+                // 
                 loadInicio(false); // finalizar loading
                 exibirMensagensInicio(true, 'QR Code criado com sucesso!');
                 setTimeout(limparMensagens, 3500);

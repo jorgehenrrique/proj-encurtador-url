@@ -106,7 +106,7 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
             }
             montaTabela(data.links);
         }).catch(err => {
-            console.error(err)
+            console.error(err) //////////////////////////////////
             exibirMensagens(false, 'Serviço indisponível!');
             setTimeout(limparMensagens, 3500);
             loadAjustes(false); // loading termina
@@ -212,7 +212,7 @@ function deletarLink(linkId) {
             trocaTela(false);
             carregarLinks();
         }).catch(err => {
-            console.error(err)
+            console.error(err) //////////////////////////////////
             trocaTela(false);
             loadAjustes(false);
             exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
@@ -266,12 +266,11 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
                         setTimeout(() => location.reload(), 10000);
                     } else { console.error('Resposta do servidor: ', response.status) }
                 }).then(response => {
-                    console.log(response) //////
                     trocaTela(false);
                     bloqueiaEdicao(false);
                     carregarLinks(); // recarrega lista de links
                 }).catch(err => {
-                    console.error(err)
+                    console.error(err) //////////////////////////////////
                     trocaTela(false);
                     loadAjustes(false); // loading ternina
                     exibirMensagens(false, 'Ocorreu um erro, tente novamente!');

@@ -79,4 +79,4 @@ Extensão: [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/w
 
 * Depois de instalar a extensão, clique nela e ative a opção **ON** para habilitar
 
-<img src="assets/requisitos/estensao.png">
+<img src="assets/requisitos/extensao.png">

@@ -8,8 +8,8 @@ import {
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
 
-for (let c of conf) {
-    c.onclick = () => {
+for (let tela of conf) {
+    tela.onclick = () => {
         if (telaContainer.style.display === '' || telaContainer.style.display === 'flex') {
             telaAjustes.style.display = 'flex';
             telaContainer.style.display = 'none';

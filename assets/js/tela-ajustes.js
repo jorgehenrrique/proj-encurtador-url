@@ -2,7 +2,7 @@ import { chaves } from "../../config.js";
 import {
     divModais, divModalBoo, divModalBooP, divModalEditar,
     modalBtnNao, modalBtnSim, telaAjustes, telaContainer,
-    logo, loading, dominio, listaLinks, divModalEditarP,
+    logo, dominio, listaLinks, divModalEditarP,
     fecharModal, inputPath, inputUrl, btnSalvarEdit,
     msgAjustes, formularios, loadingCAjustes, msgInicio,
     divQrCode, divRedeWhatsCom, divRedes, containerLoader,
@@ -91,7 +91,7 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
                 <td colspan="4">Nenhum link disponível</td>
                 </tr>`;
             if (data.links.length <= 0) {
-                exibirMensagens(false, 'Não há URLs criadas ainda! ');
+                exibirMensagens(false, 'Não há URLs criadas ainda!');
                 setTimeout(limparMensagens, 3500);
                 loadAjustes(false);
                 return;

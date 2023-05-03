@@ -7,7 +7,6 @@ export const inputEncurtar = document.querySelector('.encurtar');
 export const btnEncurtar = document.querySelector('.btn-encurtar');
 export const loading = document.querySelector('.loader');
 export const containerLoader = document.querySelector('.container-loader');
-
 export const msgInicio = document.querySelector('#msg-inicio');
 // Link encurtado
 export const divLinkCurto = document.querySelector('.link-retornado');

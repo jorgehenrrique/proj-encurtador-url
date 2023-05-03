@@ -41,6 +41,7 @@ h2{
     background-color: #00000080;
     display: none;
     z-index: 2;
+    overflow: auto;
 }
 .modal {
     background-color: var(--color-03);

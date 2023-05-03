@@ -53,13 +53,18 @@ btnEncurtarL.onclick = () => {
     verificaEntrada();
 };
 
+(() => { // Altera o placeholder
+    setTimeout(() => {
+        inputEncurtar.placeholder = 'URL A SER ENCURTADA';
+    }, 5000);
+})()
+
 btnEncurtar.onclick = () => verificaEntrada();
 
 function verificaEntrada() {
     loadInicio(true);
     let encurtarLink = inputEncurtar.value.trim();
-    if (encurtarLink.length > 4 && isNaN(encurtarLink) && !(encurtarLink.includes(','))) {
-        inputEncurtar.value = '';
+    if (encurtarLink.length > 8 && isNaN(encurtarLink) && !(encurtarLink.includes(',')) && encurtarLink.includes('.')) {
         addLink(encurtarLink);
     } else {
         inputEncurtar.value = `INFORME UMA URL VÁLIDA!`;
@@ -103,13 +108,13 @@ function addLink(url) {
                 divLinkCurto.style.display = 'none';
                 divBtnInteracao.style.display = 'none';
             } else {
+                inputEncurtar.value = ''; // Limpa input, se ok
                 exibirMensagensInicio(true, 'Link criado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 compartilharLinks(response.shortURL, response.createdAt, response.idString);
             }
             loadInicio(false);
         }).catch(err => {
-            console.error(err.message) //////////////////////////////////
             loadInicio(false);
             exibirMensagensInicio(false, 'Ocorreu um erro, tente novamente!');
             setTimeout(limparMensagens, 3500);
@@ -130,7 +135,7 @@ function compartilharLinks(linkCurto, data, linkId) {
     aLink.innerText = `${linkCurto}`;
     aLink.href = `${linkCurto}`;
     smallData.innerHTML = `Link criado em: ${criacao.date} às ${criacao.time}`;
-    
+
     containerLoader.style.display = 'none'; // container do loader
     divBtnInteracao.style.display = 'flex'; // exibe botoes de copiar, compartilhar e qr
 
@@ -244,7 +249,6 @@ export function receberQrCode(linkId) {
                 const imageUrl = URL.createObjectURL(response);
                 qrImg.src = imageUrl;
                 qrDownload.href = imageUrl;
-                divQrCode.style.display = 'flex';
                 // Modal ajustes
                 qrImgModal.src = imageUrl;
                 qrDownloadModal.href = imageUrl;

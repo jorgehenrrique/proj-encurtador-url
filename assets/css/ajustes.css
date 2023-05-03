@@ -11,6 +11,7 @@
     gap: 3rem;
     position: relative;
     color: var(--color-01);
+    box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.5);
 }
 h2{
     align-self: center;
@@ -52,6 +53,7 @@ h2{
     text-align: center;
     position: relative;
     display: none;
+    box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.5);
 }
 .modal-boolean {
     background-color: var(--color-03);
@@ -64,6 +66,7 @@ h2{
     text-align: center;
     position: relative;
     display: none;
+    box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.5);
 }
 .fechar-modal {
     position: absolute;

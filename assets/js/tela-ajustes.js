@@ -106,7 +106,6 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
             }
             montaTabela(data.links);
         }).catch(err => {
-            console.error(err) //////////////////////////////////
             exibirMensagens(false, 'Serviço indisponível!');
             setTimeout(limparMensagens, 3500);
             loadAjustes(false); // loading termina
@@ -204,15 +203,14 @@ function deletarLink(linkId) {
                 exibirMensagens(true, 'Link deletado com sucesso!');
                 setTimeout(limparMensagens, 3500);
                 return response.json();
-            } else if (response.status === 404) {
-                console.warn('EDITANDO LINKS RÁPIDO DEMAIS, ALERTA DE AVISO DA API');
+            } else {
+                console.error('Resposta do servidor: ', response.status)
                 setTimeout(() => location.reload(), 10000);
-            } else { console.error('Resposta do servidor: ', response.status) }
+            }
         }).then(response => {
             trocaTela(false);
             carregarLinks();
         }).catch(err => {
-            console.error(err) //////////////////////////////////
             trocaTela(false);
             loadAjustes(false);
             exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
@@ -229,8 +227,7 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
 
     inputPath.value = `${slug}`;
     inputUrl.value = `${linkOriginal}`;
-    inputTitulo.value = `${titulo}`;
-    if (titulo === 'undefined') {
+    if (titulo === 'undefined' || titulo === 'null') {
         inputTitulo.value = 'Sem título';
     } else {
         inputTitulo.value = `${titulo}`;
@@ -238,47 +235,13 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
 
     btnSalvarEdit.onclick = (() => {
         bloqueiaEdicao(true);
-        if (inputPath.value.trim().length === slug.length && inputUrl.value.trim().length > 6) {
+        let entradaPath = inputPath.value.trim();
+        let entradaUrl = inputUrl.value.trim();
+        if (entradaPath.length === slug.length && entradaUrl.length > 6) {
             loadAjustes(true); // loading inicia
-            slug = inputPath.value.trim();
-            linkOriginal = inputUrl.value.trim();
-            titulo = inputTitulo.value.trim();
-
-            const apiKey = chaves.apiKey;
-            const options = {
-                method: 'POST',
-                headers: {
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    Authorization: `${apiKey}`
-                },
-                body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}`, title: `${titulo}` })
-            };
-
-            fetch(`https://api.short.io/links/${linkId}`, options)
-                .then(response => {
-                    if (response.ok && response.status === 200) {
-                        exibirMensagens(true, 'Link editado com sucesso!');
-                        setTimeout(limparMensagens, 3500);
-                        return response.json();
-                    } else if (response.status === 400) {
-                        console.warn('DELETANDO LINKS RÁPIDO DEMAIS, ALERTA DE AVISO DA API');
-                        setTimeout(() => location.reload(), 10000);
-                    } else { console.error('Resposta do servidor: ', response.status) }
-                }).then(response => {
-                    trocaTela(false);
-                    bloqueiaEdicao(false);
-                    carregarLinks(); // recarrega lista de links
-                }).catch(err => {
-                    console.error(err) //////////////////////////////////
-                    trocaTela(false);
-                    loadAjustes(false); // loading ternina
-                    exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
-                    setTimeout(limparMensagens, 3500);
-                    bloqueiaEdicao(false);
-                });
+            executarEdicao(linkId, slug, linkOriginal, titulo);
         } else {
-            if (inputPath.value.trim().length < slug.length || inputPath.value.trim().length > slug.length) {
+            if (entradaPath.length < slug.length || entradaPath.length > slug.length) {
                 inputPath.value = `${slug.length} DÍGITOS!`;
                 inputPath.classList.add('alerta');
                 inputPath.classList.add('animate__shakeX');
@@ -289,7 +252,7 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
                     bloqueiaEdicao(false);
                 }, 1500);
             }
-            if (inputUrl.value.trim().length < 6) {
+            if (entradaUrl.length < 6) {
                 inputUrl.value = `URL INVÁLIDA!`;
                 inputUrl.classList.add('alerta');
                 inputUrl.classList.add('animate__shakeX');
@@ -305,6 +268,45 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
             }, 1500);
         }
     });
+}
+
+function executarEdicao(linkId, slug, linkOriginal, titulo) {
+    slug = inputPath.value.trim();
+    linkOriginal = inputUrl.value.trim();
+    titulo = inputTitulo.value.trim();
+
+    const apiKey = chaves.apiKey;
+    const options = {
+        method: 'POST',
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            Authorization: `${apiKey}`
+        },
+        body: JSON.stringify({ originalURL: `${linkOriginal}`, path: `${slug}`, title: `${titulo}` })
+    };
+
+    fetch(`https://api.short.io/links/${linkId}`, options)
+        .then(response => {
+            if (response.ok && response.status === 200) {
+                exibirMensagens(true, 'Link editado com sucesso!');
+                setTimeout(limparMensagens, 3500);
+                return response.json();
+            } else {
+                console.error('Resposta do servidor: ', response.status)
+                setTimeout(() => location.reload(), 10000);
+            }
+        }).then(response => {
+            trocaTela(false);
+            bloqueiaEdicao(false);
+            carregarLinks(); // recarrega lista de links
+        }).catch(err => {
+            trocaTela(false);
+            loadAjustes(false); // loading ternina
+            exibirMensagens(false, 'Ocorreu um erro, tente novamente!');
+            setTimeout(limparMensagens, 3500);
+            bloqueiaEdicao(false);
+        });
 }
 
 function bloqueiaEdicao(ok) {

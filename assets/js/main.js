@@ -64,7 +64,8 @@ btnEncurtar.onclick = () => verificaEntrada();
 function verificaEntrada() {
     loadInicio(true);
     let encurtarLink = inputEncurtar.value.trim();
-    if (encurtarLink.length > 8 && isNaN(encurtarLink) && !(encurtarLink.includes(',')) && encurtarLink.includes('.')) {
+    if (encurtarLink.length > 8 && isNaN(encurtarLink) &&
+        !(encurtarLink.includes(',')) && encurtarLink.includes('.')) {
         addLink(encurtarLink);
     } else {
         inputEncurtar.value = `INFORME UMA URL VÁLIDA!`;

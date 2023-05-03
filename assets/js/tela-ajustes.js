@@ -6,7 +6,7 @@ import {
     fecharModal, inputPath, inputUrl, btnSalvarEdit,
     msgAjustes, formularios, loadingCAjustes, msgInicio,
     divQrCode, divRedeWhatsCom, divRedes, containerLoader,
-    btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao, inputTitulo,
+    btnEncurtar, btnEncurtarL, divLinkCurto, divBtnInteracao, inputTitulo, inputEncurtar,
 } from "../modules/elementos.js";
 import { receberQrCode } from "./main.js";
 
@@ -44,6 +44,7 @@ function trocaTela(status) { // Sai dos ajustes e modal
         btnEncurtarL.style.display = 'none';
         divLinkCurto.style.display = 'none';
         divBtnInteracao.style.display = 'none';
+        inputEncurtar.value = '';
     } else {
         divModais.style.display = 'none';
         divModalBoo.style.display = 'none';
@@ -237,7 +238,8 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
         bloqueiaEdicao(true);
         let entradaPath = inputPath.value.trim();
         let entradaUrl = inputUrl.value.trim();
-        if (entradaPath.length === slug.length && entradaUrl.length > 6) {
+        if (entradaPath.length === slug.length && entradaUrl.length > 6 &&
+            isNaN(entradaUrl) && !(entradaUrl.includes(',')) && entradaUrl.includes('.')) {
             loadAjustes(true); // loading inicia
             executarEdicao(linkId, slug, linkOriginal, titulo);
         } else {
@@ -252,7 +254,8 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
                     bloqueiaEdicao(false);
                 }, 1500);
             }
-            if (entradaUrl.length < 6) {
+            if (entradaUrl.length < 6 || !(isNaN(entradaUrl)) ||
+                entradaUrl.includes(',') || !(entradaUrl.includes('.'))) {
                 inputUrl.value = `URL INVÁLIDA!`;
                 inputUrl.classList.add('alerta');
                 inputUrl.classList.add('animate__shakeX');

@@ -21,6 +21,7 @@
 .animate__fadeIn, .animate__shakeX, .animate__bounceInLeft{
     animation-duration: 1s;
 }
+
 body{
     background-color: var(--color-01);
 }

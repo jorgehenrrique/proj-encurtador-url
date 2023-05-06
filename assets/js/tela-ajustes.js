@@ -176,7 +176,7 @@ function montarEventos() {
 function editarLink(linkId, link, linkOriginal, titulo) { // Modal editar link
     divModais.style.display = 'block';
     divModalEditar.style.display = 'block';
-    divModalEditarP.innerText = `Editando: ${link}`;
+    divModalEditarP.innerHTML = `Editando: <a href="${link}" target="_blank">${link}</a>`;
 
     fecharModal.addEventListener('click', () => trocaTela(false));
     tratarEdicao(linkId, link, linkOriginal, titulo);

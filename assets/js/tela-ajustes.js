@@ -230,9 +230,7 @@ function tratarEdicao(linkId, link, linkOriginal, titulo) {
     inputUrl.value = `${linkOriginal}`;
     if (titulo === 'undefined' || titulo === 'null') {
         inputTitulo.value = 'Sem título';
-    } else {
-        inputTitulo.value = `${titulo}`;
-    }
+    } else { inputTitulo.value = `${titulo}`; }
 
     btnSalvarEdit.onclick = (() => {
         bloqueiaEdicao(true);

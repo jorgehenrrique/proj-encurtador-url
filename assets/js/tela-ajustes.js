@@ -97,14 +97,6 @@ function solicitaAcesso(apiKey, domainId) { // Acessar api de links
                 loadAjustes(false);
                 return;
             }
-            if (data.links.length == 1) {
-                exibirMensagens(true, 'URL disponível listada!');
-                setTimeout(limparMensagens, 3500);
-            }
-            if (data.links.length > 1) {
-                exibirMensagens(true, 'URLs disponíveis listadas!');
-                setTimeout(limparMensagens, 3500);
-            }
             montaTabela(data.links);
         }).catch(err => {
             exibirMensagens(false, 'Serviço indisponível!');

@@ -118,7 +118,6 @@ function montaTabela(dados) {
     loadAjustes(false); // loading termina
     dados.forEach(element => {
         let time = formataData(element.createdAt);
-
         listaLinks.innerHTML += `<tr>
         <td>${element.shortURL}</td>
         <td>${element.originalURL}</td>
@@ -129,6 +128,7 @@ function montaTabela(dados) {
     });
 
 };
+
 
 // || Formata data
 export function formataData(dateTime) {
@@ -195,7 +195,6 @@ function deletarLink(linkId) {
             if (response.ok && response.status === 200) {
                 exibirMensagens(true, 'Link deletado com sucesso!');
                 setTimeout(limparMensagens, 3500);
-                return response.json();
             } else {
                 console.error('Resposta do servidor: ', response.status)
                 setTimeout(() => location.reload(), 10000);
@@ -284,7 +283,6 @@ function executarEdicao(linkId, slug, linkOriginal, titulo) {
             if (response.ok && response.status === 200) {
                 exibirMensagens(true, 'Link editado com sucesso!');
                 setTimeout(limparMensagens, 3500);
-                return response.json();
             } else {
                 console.error('Resposta do servidor: ', response.status)
                 setTimeout(() => location.reload(), 10000);

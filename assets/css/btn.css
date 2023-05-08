@@ -51,4 +51,5 @@
 }
 .okay{
     background-color: var(--color-ok);
+    color: var(--color-dark03);
 }

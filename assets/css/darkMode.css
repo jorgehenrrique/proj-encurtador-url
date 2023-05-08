@@ -46,7 +46,7 @@
         background-color: var(--color-dark02);
         transition: all 0.5s ease;
     }
-    input.api-key{
+    .api-key{
         background-color: var(--color-dark03);
         transition: all 0.5s ease;
     }

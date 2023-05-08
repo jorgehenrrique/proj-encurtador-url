@@ -49,3 +49,6 @@
 .alerta{
     background-color: var(--color-err);
 }
+.okay{
+    background-color: var(--color-ok);
+}

@@ -46,6 +46,13 @@ body{
     cursor: pointer;
     z-index: 1;
 }
+.chave{
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    cursor: pointer;
+    z-index: 1;
+}
 h1{
     align-self: center;
     text-align: center;
@@ -162,4 +169,32 @@ footer{
     text-align: center;
     color: var(--color-04);
     z-index: -1;
+}
+
+/* || Modal api-key */
+.modail-key {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #00000080;
+    display: none;
+    z-index: 2;
+    overflow: auto;
+}
+.modal-boolean-key {
+    background-color: var(--color-03);
+    width: 80%;
+    max-width: 60rem;
+    margin: auto;
+    margin-top: 5rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.5);
+}
+.modal-boolean-key input{
+    margin-bottom: 1rem;
 }

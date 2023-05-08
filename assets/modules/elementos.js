@@ -1,6 +1,7 @@
 // || Elementos tela 1
 export const telaContainer = document.querySelector('.container');
 export const telaAjustes = document.querySelector('.ajustes');
+export const chave = document.querySelector('.chave');
 export const conf = document.querySelectorAll('.conf');
 export const logo = document.querySelector('#logo');
 export const inputEncurtar = document.querySelector('.encurtar');

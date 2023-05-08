@@ -1,12 +1,15 @@
 import { chaves } from "../../config.js";
+import { addChaves } from "../modules/addkey.js";
 import {
     aLink, btnCompartilhar, btnCopiar, btnEncurtar, btnEncurtarL, btnQr,
-    btnRedeWhats, conf, containerLoader, divBtnInteracao, divLinkCurto,
+    btnRedeWhats, chave, conf, containerLoader, divBtnInteracao, divLinkCurto,
     divQrCode, divRedeWhatsCom, divRedes, inputEncurtar, inputRedeWhats,
     loading, msgInicio, qrDownload, qrDownloadModal, qrImg, qrImgModal, redeFace, redeLinkd, redeTwitt,
     redeWhats, smallData, telaAjustes, telaContainer
 } from "../modules/elementos.js";
 import { carregarLinks, formataData, limparMensagens } from "./tela-ajustes.js";
+
+chave.addEventListener('click', addChaves); // Modal de add api-key
 
 for (let tela of conf) {
     tela.onclick = () => {

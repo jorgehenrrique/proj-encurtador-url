@@ -40,6 +40,11 @@
         color: var(--color-dark01);
         transition: all 0.5s ease;
     }
+    .conf{ /* icone ajustes */
+        background-color: #e1e0e080;
+        border-radius: 50%;
+        box-shadow: 0px 0px 15px 2px #e1e0e080;
+    }
 
     /* || Tela ajustes */
     .ajustes{
@@ -56,6 +61,7 @@
         background-color: #c1c1c114;
         transition: all 0.5s ease;
     }
+
     /* || Modal */
     .modal {
         background-color: var(--color-dark02);

@@ -17,5 +17,3 @@ function restaurarChavesLocal() {
 	}
 }
 restaurarChavesLocal();
-
-console.log(chaves)

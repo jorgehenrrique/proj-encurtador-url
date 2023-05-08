@@ -1,3 +1,6 @@
+import { exibirMensagensInicio } from "../js/main.js";
+import { limparMensagens } from "../js/tela-ajustes.js";
+
 const divModalKey = document.querySelector('.modail-key');
 const btnModalKeySalvar = document.querySelector('.btn-key-salvar');
 const btnModalKeyCancelar = document.querySelector('.btn-key-cancelar');
@@ -44,18 +47,16 @@ function buscaChaves() {
             btnModalKeyCancelar.disabled = false;
           }, 1000);
         }
+        if (!response.ok) {
+          throw new Error('Resposta do servidor: ', response.status)
+        }
       }).then(response => {
-        // cria objeto de chaves
-        keys = {
+        keys = { // cria objeto de chaves
           apiKey: apiKey,
           domainId: response[0].id,
           domainUrl: response[0].hostname
         };
-        salvarChavesLocal(keys);
-        // salva local
-        function salvarChavesLocal() {
-          localStorage.setItem('keys', JSON.stringify(keys));
-        }
+        salvarChavesLocal(keys); // salva local
         // efeito + reload key
         setTimeout(() => {
           inputApiKey.classList.add('okay');
@@ -75,6 +76,11 @@ function buscaChaves() {
         setTimeout(() => {
           location.reload();
         }, 4000);
+        exibirMensagensInicio(true, 'Chave validada! carregando chave.');
+        setTimeout(limparMensagens, 3500);
+      }).catch(err => {
+        exibirMensagensInicio(false, 'Chave inválida, tente novamente!');
+        setTimeout(limparMensagens, 3500);
       });
   } else {
     inputApiKey.value = `INFORME UMA CHAVE VÁLIDA!`;
@@ -90,4 +96,9 @@ function buscaChaves() {
       btnModalKeyCancelar.disabled = false;
     }, 1000);
   }
+}
+
+// salva local
+function salvarChavesLocal(keys) {
+  localStorage.setItem('keys', JSON.stringify(keys));
 }

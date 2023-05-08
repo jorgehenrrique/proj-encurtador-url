@@ -25,7 +25,7 @@ for (let tela of conf) {
     }
 }
 
-function exibirMensagensInicio(status, mensagem) {
+export function exibirMensagensInicio(status, mensagem) {
     msgInicio.innerText = mensagem;
     msgInicio.style.display = 'flex';
     if (status) {

@@ -40,11 +40,6 @@
         color: var(--color-dark01);
         transition: all 0.5s ease;
     }
-    .conf, .chave{ /* icone ajustes */
-        background-color: var(--color-05);
-        border-radius: 50%;
-        border: 2px solid transparent;
-    }
 
     /* || Modal api-key */
     .modal-boolean-key {

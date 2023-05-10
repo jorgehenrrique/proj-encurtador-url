@@ -1,4 +1,4 @@
-// KEY TEMPORÁRIA PARA TESTE
+// KEY TEMPORÁRIA PARA USO
 
 export let chaves = {
 	apiKey: "sk_tIngbi0Tiqk2GPJG",

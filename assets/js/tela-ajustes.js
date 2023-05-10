@@ -123,9 +123,9 @@ function montaTabela(dados) {
         <td>${element.originalURL}</td>
         <td>${time.date} às ${time.time}</td>
         <td><img src="assets/icon/conf/edit.png" class="icon-conf edit-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}" lin2="${element.originalURL}" tit="${element.title}"> <img src="assets/icon/conf/del.png" class="icon-conf delete-icon" style="width: 20px;" id-string="${element.idString}" lin="${element.shortURL}"></td>
-    </tr>`
-        montarEventos();
+    </tr>`;
     });
+    montarEventos();
 };
 
 

@@ -80,3 +80,10 @@ Extensão: [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/w
 * Depois de instalar a extensão, clique nela e ative a opção **ON** para habilitar
 
 <img src="assets/requisitos/extensao.png">
+
+### Nova atualização: agora você pode utilizar sua própria chave da API
+
+* Clique na chave para adicionar sua *api key*. Ela será armazenada localmente no seu navegador para reutilização posterior.
+* Demonstração
+
+<img src="assets/requisitos/addKey.gif">

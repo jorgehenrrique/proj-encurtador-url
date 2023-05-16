@@ -1,9 +1,9 @@
 // KEY TEMPORÁRIA PARA USO
 
 export let chaves = {
-	apiKey: "sk_tIngbi0Tiqk2GPJG",
-	domainId: "715013",
-	domainUrl: "964u.short.gy"
+	apiKey: "",
+	domainId: "",
+	domainUrl: ""
 }
 
 // Restaura local

@@ -274,3 +274,20 @@ export function receberQrCode(linkId) {
             });
     }
 }
+
+
+// Checa se há chaves salvas, e avisa caso não
+(() => {
+    const key = chaves;
+    if (key.apiKey === '' && key.domainId === '' && key.domainUrl === '') {
+        exibirMensagensInicio(false, 'Insira sua chave de API, para gerenciar suas URLs!');
+        setTimeout(limparMensagens, 4000);
+        setTimeout(() => {
+            exibirMensagensInicio(true, 'Obtenha sua chave no endereço: short.io');
+            setTimeout(limparMensagens, 4000);
+        }, 4100);
+    } else {
+        exibirMensagensInicio(true, 'Chaves de API carregadas!');
+        setTimeout(limparMensagens, 3500);
+    }
+})()

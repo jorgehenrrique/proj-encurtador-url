@@ -276,7 +276,7 @@ export function receberQrCode(linkId) {
 }
 
 
-// Checa se há chaves salvas, e avisa caso não
+// Checa se há chaves salvas, e mostra os avisos
 (() => {
     const key = chaves;
     if (key.apiKey === '' && key.domainId === '' && key.domainUrl === '') {
